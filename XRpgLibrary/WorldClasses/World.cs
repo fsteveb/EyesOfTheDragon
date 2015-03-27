@@ -9,11 +9,12 @@ using Microsoft.Xna.Framework.Input;
 
 using RpgLibrary.CharacterClasses;
 using RpgLibrary.ItemClasses;
+
 using XRpgLibrary.TileEngine;
 using XRpgLibrary.SpriteClasses;
 namespace XRpgLibrary.WorldClasses
 {
-    public class World
+    public class World : DrawableGameComponent
     {
         #region Graphic Field and Property Region
         Rectangle screenRect;
@@ -29,23 +30,52 @@ namespace XRpgLibrary.WorldClasses
         #endregion
 
         #region Level Field and Property Region
+        readonly List<Level> levels = new List<Level>();
+        int currentLevel = -1;
+
+        public List<Level> Levels
+        {
+            get { return levels; }
+        }
+
+        public int CurrentLevel
+        {
+            get { return currentLevel; }
+            set
+            {
+                if (value < 0 || value >= levels.Count)
+                    throw new IndexOutOfRangeException();
+
+                if (levels[value] == null)
+                    throw new NullReferenceException();
+
+                currentLevel = value;
+            }
+        }
         #endregion
 
         #region Constructor Region
-        public World(Rectangle screenRectangle)
+        public World(Game game, Rectangle screenRectangle)
+            : base(game)
         {
             screenRect = screenRectangle;
         }
         #endregion
 
         #region Method Region
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime)
         {
+            base.Draw(gameTime);
         }
-        #endregion
+
+        public void DrawLevel(SpriteBatch spriteBatch, Camera camera)
+        {
+            levels[currentLevel].Draw(spriteBatch, camera);
+        }
+        #endregion
     }
 }

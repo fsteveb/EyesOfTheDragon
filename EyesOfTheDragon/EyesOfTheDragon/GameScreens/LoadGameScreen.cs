@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using Microsoft.Xna.Framework.Content;
 using XRpgLibrary;
 using XRpgLibrary.Controls;
 using XRpgLibrary.SpriteClasses;
@@ -16,50 +16,54 @@ using EyesOfTheDragon.Components;
 
 namespace EyesOfTheDragon.GameScreens
 {
-    public class CharacterGeneratorScreen : BaseGameState
+    public class LoadGameScreen : BaseGameState
     {
         #region Field Region
-        LeftRightSelector genderSelector;
-        LeftRightSelector classSelector;
         PictureBox backgroundImage;
-        PictureBox characterImage;
-        Texture2D[,] characterImages;
-
-        string[] genderItems = { "Male", "Female" };
-        string[] classItems = { "Fighter", "Wizard", "Rogue", "Priest" };
+        ListBox loadListBox;
+        LinkLabel loadLinkLabel;
+        LinkLabel exitLinkLabel;
         #endregion
 
         #region Property Region
-        public string SelectedGender
-        {
-            get { return genderSelector.SelectedItem; }
-        }
-
-        public string SelectedClass
-        {
-            get { return classSelector.SelectedItem; }
-        }
         #endregion
 
         #region Constructor Region
-        public CharacterGeneratorScreen(Game game, GameStateManager stateManager)
-            : base(game, stateManager)
+        public LoadGameScreen(Game game, GameStateManager manager)
+            : base(game, manager)
         {
         }
         #endregion
 
-        #region XNA Method Region
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-
+        #region Method Region
         protected override void LoadContent()
         {
             base.LoadContent();
-
-            LoadImages();
-            CreateControls();
+            ContentManager Content = Game.Content;
+            backgroundImage = new PictureBox(
+            Content.Load<Texture2D>(@"Backgrounds\titlescreen"),
+            GameRef.ScreenRectangle);
+            ControlManager.Add(backgroundImage);
+            loadLinkLabel = new LinkLabel();
+            loadLinkLabel.Text = "Select game";
+            loadLinkLabel.Position = new Vector2(50, 100);
+            loadLinkLabel.Selected += new EventHandler(loadLinkLabel_Selected);
+            ControlManager.Add(loadLinkLabel);
+            exitLinkLabel = new LinkLabel();
+            exitLinkLabel.Text = "Back";
+            exitLinkLabel.Position = new Vector2(50, 100 + exitLinkLabel.SpriteFont.LineSpacing);
+            exitLinkLabel.Selected += new EventHandler(exitLinkLabel_Selected);
+            ControlManager.Add(exitLinkLabel);
+            loadListBox = new ListBox(
+            Content.Load<Texture2D>(@"GUI\listBoxImage"),
+            Content.Load<Texture2D>(@"GUI\rightarrowUp"));
+            loadListBox.Position = new Vector2(400, 100);
+            loadListBox.Selected += new EventHandler(loadListBox_Selected);
+            loadListBox.Leave += new EventHandler(loadListBox_Leave);
+            for (int i = 0; i < 20; i++)
+                loadListBox.Items.Add("Game number: " + i.ToString());
+            ControlManager.Add(loadListBox);
+            ControlManager.NextControl();
         }
 
         public override void Update(GameTime gameTime)
@@ -78,78 +82,31 @@ namespace EyesOfTheDragon.GameScreens
         #endregion
 
         #region Method Region
-        private void CreateControls()
+        void loadListBox_Leave(object sender, EventArgs e)
         {
-            Texture2D leftTexture = Game.Content.Load<Texture2D>(@"GUI\leftarrowUp");
-            Texture2D rightTexture = Game.Content.Load<Texture2D>(@"GUI\rightarrowUp");
-            Texture2D stopTexture = Game.Content.Load<Texture2D>(@"GUI\StopBar");
-
-            backgroundImage = new PictureBox(
-                Game.Content.Load<Texture2D>(@"Backgrounds\titlescreen"),
-                GameRef.ScreenRectangle);
-            ControlManager.Add(backgroundImage);
-
-            Label label1 = new Label();
-            label1.Text = "Who will search for the Eyes of the Dragon?";
-            label1.Size = label1.SpriteFont.MeasureString(label1.Text);
-            label1.Position = new Vector2((GameRef.Window.ClientBounds.Width - label1.Size.X) /
-                2, 150);
-            ControlManager.Add(label1);
-
-            genderSelector = new LeftRightSelector(leftTexture, rightTexture, stopTexture);
-            genderSelector.SetItems(genderItems, 125);
-            genderSelector.Position = new Vector2(label1.Position.X, 200);
-            genderSelector.SelectionChanged += new EventHandler(selectionChanged);
-            ControlManager.Add(genderSelector);
-
-            classSelector = new LeftRightSelector(leftTexture, rightTexture, stopTexture);
-            classSelector.SetItems(classItems, 125);
-            classSelector.Position = new Vector2(label1.Position.X, 250);
-            classSelector.SelectionChanged += selectionChanged;
-
-            ControlManager.Add(classSelector);
-
-            LinkLabel linkLabel1 = new LinkLabel();
-            linkLabel1.Text = "Accept this character.";
-            linkLabel1.Position = new Vector2(label1.Position.X, 300);
-            linkLabel1.Selected += new EventHandler(linkLabel1_Selected);
-
-            ControlManager.Add(linkLabel1);
-
-            characterImage = new PictureBox(
-                characterImages[0, 0],
-                new Rectangle(500, 200, 96, 96),
-                new Rectangle(0, 0, 32, 32));
-            ControlManager.Add(characterImage);
-
-            ControlManager.NextControl();
+            ControlManager.AcceptInput = true;
         }
 
-        private void LoadImages()
+        void loadLinkLabel_Selected(object sender, EventArgs e)
         {
-            characterImages = new Texture2D[genderItems.Length, classItems.Length];
-            for (int i = 0; i < genderItems.Length; i++)
-            {
-                for (int j = 0; j < classItems.Length; j++)
-                {
-                    characterImages[i, j] = Game.Content.Load<Texture2D>(@"PlayerSprites\" +
-                   genderItems[i] + classItems[j]);
-                }
-            }
+            ControlManager.AcceptInput = false;
+            loadLinkLabel.HasFocus = false;
+            loadListBox.HasFocus = true;
         }
 
-        void selectionChanged(object sender, EventArgs e)
+        void loadListBox_Selected(object sender, EventArgs e)
         {
-            characterImage.Image = characterImages[genderSelector.SelectedIndex, classSelector.SelectedIndex];
-        }
-
-        void linkLabel1_Selected(object sender, EventArgs e)
-        {
-            InputHandler.Flush();
+            loadLinkLabel.HasFocus = true;
+            loadListBox.HasFocus = false;
+            ControlManager.AcceptInput = true;
             StateManager.ChangeState(GameRef.GamePlayScreen);
-
             CreatePlayer();
             CreateWorld();
+        }
+
+        void exitLinkLabel_Selected(object sender, EventArgs e)
+        {
+            StateManager.PopState();
         }
 
         private void CreatePlayer()
@@ -164,7 +121,7 @@ namespace EyesOfTheDragon.GameScreens
             animation = new Animation(3, 32, 32, 0, 96);
             animations.Add(AnimationKey.Up, animation);
             AnimatedSprite sprite = new AnimatedSprite(
-                characterImages[genderSelector.SelectedIndex, classSelector.SelectedIndex],
+                GameRef.Content.Load<Texture2D>(@"PlayerSprites\malefighter"),
                 animations);
             GamePlayScreen.Player = new Player(GameRef, sprite);
         }
@@ -176,8 +133,8 @@ namespace EyesOfTheDragon.GameScreens
 
             tilesetTexture = Game.Content.Load<Texture2D>(@"Tilesets\tileset2");
             Tileset tileset2 = new Tileset(tilesetTexture, 8, 8, 32, 32);
-            List<Tileset> tilesets = new List<Tileset>();
 
+            List<Tileset> tilesets = new List<Tileset>();
             tilesets.Add(tileset1);
             tilesets.Add(tileset2);
 

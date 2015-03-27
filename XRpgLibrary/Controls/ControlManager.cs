@@ -14,9 +14,17 @@ namespace XRpgLibrary.Controls
         #region Fields and Properties
         int selectedControl = 0;
         static SpriteFont spriteFont;
+        bool acceptInput = true;
+
         public static SpriteFont SpriteFont
         {
             get { return spriteFont; }
+        }
+
+        public bool AcceptInput
+        {
+            get { return acceptInput; }
+            set { acceptInput = value; }
         }
         #endregion
 
@@ -53,15 +61,18 @@ namespace XRpgLibrary.Controls
                 if (c.HasFocus)
                     c.HandleInput(playerIndex);
             }
+            if (!AcceptInput)
+                return;
             if (InputHandler.ButtonPressed(Buttons.LeftThumbstickUp, playerIndex) ||
-            InputHandler.ButtonPressed(Buttons.DPadUp, playerIndex) ||
-            InputHandler.KeyPressed(Keys.Up))
+                InputHandler.ButtonPressed(Buttons.DPadUp, playerIndex) ||
+                InputHandler.KeyPressed(Keys.Up))
                 PreviousControl();
             if (InputHandler.ButtonPressed(Buttons.LeftThumbstickDown, playerIndex) ||
-         InputHandler.ButtonPressed(Buttons.DPadDown, playerIndex) ||
-         InputHandler.KeyPressed(Keys.Down))
+                InputHandler.ButtonPressed(Buttons.DPadDown, playerIndex) ||
+                InputHandler.KeyPressed(Keys.Down))
                 NextControl();
         }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Control c in this)
