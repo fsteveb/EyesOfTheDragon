@@ -56,16 +56,17 @@ namespace RpgLibrary.CharacterClasses
         #region Method Region
         public override string ToString()
         {
-            string toString = "Name = " + EntityName + ", ";
-            toString += "Strength = " + Strength.ToString() + ", ";
-            toString += "Dexterity = " + Dexterity.ToString() + ", ";
-            toString += "Cunning = " + Cunning.ToString() + ", ";
-            toString += "Willpower = " + Willpower.ToString() + ", ";
-            toString += "Magic = " + Magic.ToString() + ", ";
-            toString += "Constitution = " + Constitution.ToString() + ", ";
-            toString += "Health Formula = " + HealthFormula + ", ";
-            toString += "Stamina Formula = " + StaminaFormula + ", ";
-            toString += "Magic Formula = " + MagicFormula;
+            string toString = EntityName + ", ";
+            toString += Strength.ToString() + ", ";
+            toString += Dexterity.ToString() + ", ";
+            toString += Cunning.ToString() + ", ";
+            toString += Willpower.ToString() + ", ";
+            toString += Magic.ToString() + ", ";
+            toString += Constitution.ToString() + ", ";
+            toString += HealthFormula + ", ";
+            toString += StaminaFormula + ", ";
+            toString += MagicFormula;
+
             return toString;
         }
 
@@ -82,6 +83,7 @@ namespace RpgLibrary.CharacterClasses
             data.HealthFormula = this.HealthFormula;
             data.StaminaFormula = this.StaminaFormula;
             data.MagicFormula = this.MagicFormula;
+
             return data;
         }
         #endregion

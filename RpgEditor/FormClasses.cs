@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using RpgLibrary.CharacterClasses;
+using System.IO;
 
 namespace RpgEditor
 {
@@ -62,13 +63,73 @@ namespace RpgEditor
             FormDetails.EntityDataManager.EntityData.Add(
                 entityData.EntityName,
                 entityData);
-        }
+        }
+
         void btnEdit_Click(object sender, EventArgs e)
         {
+            if (lbDetails.SelectedItem != null)
+            {
+                string detail = (string)lbDetails.SelectedItem.ToString();
+                string[] parts = detail.Split(',');
+                string entity = parts[0].Trim();
+                EntityData data = entityDataManager.EntityData[entity];
+                EntityData newData = null;
+
+                using (FormEntityData frmEntityData = new FormEntityData())
+                {
+                    frmEntityData.EntityData = data;
+                    frmEntityData.ShowDialog();
+
+                    if (frmEntityData.EntityData == null)
+                        return;
+
+                    if (frmEntityData.EntityData.EntityName == entity)
+                    {
+                        entityDataManager.EntityData[entity] = frmEntityData.EntityData;
+                        FillListBox();
+                        return;
+                    }
+                    newData = frmEntityData.EntityData;
+                }
+
+                DialogResult result = MessageBox.Show(
+                    "Name has changed. Do you want to add a new entry?",
+                    "New Entry",
+                    MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.No)
+                    return;
+
+                if (entityDataManager.EntityData.ContainsKey(newData.EntityName))
+                {
+                    MessageBox.Show("Entry already exists. Use Edit to modify the entry.");
+                    return;
+                }
+
+                lbDetails.Items.Add(newData);
+                entityDataManager.EntityData.Add(newData.EntityName, newData);
+            }
         }
 
         void btnDelete_Click(object sender, EventArgs e)
         {
+            if (lbDetails.SelectedItem != null)
+            {
+                string detail = (string)lbDetails.SelectedItem;
+                string[] parts = detail.Split(',');
+                string entity = parts[0].Trim();
+                DialogResult result = MessageBox.Show(
+                    "Are you sure you want to delete " + entity + "?",
+                    "Delete",
+                    MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    lbDetails.Items.RemoveAt(lbDetails.SelectedIndex);
+                    entityDataManager.EntityData.Remove(entity);
+                    if (File.Exists(FormMain.ClassPath + @"\" + entity + ".xml"))
+                        File.Delete(FormMain.ClassPath + @"\" + entity + ".xml");
+                }
+            }
         }
         #endregion
 
@@ -77,6 +138,7 @@ namespace RpgEditor
             lbDetails.Items.Clear();
             foreach (string s in FormDetails.EntityDataManager.EntityData.Keys)
                 lbDetails.Items.Add(FormDetails.EntityDataManager.EntityData[s]);
-        }
+        }
+
     }
 }

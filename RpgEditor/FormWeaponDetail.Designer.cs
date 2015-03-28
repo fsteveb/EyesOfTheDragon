@@ -1,6 +1,6 @@
 ﻿namespace RpgEditor
 {
-    partial class FormWeaponDetail
+    partial class FormWeaponDetails
     {
         /// <summary>
         /// Required designer variable.
@@ -281,11 +281,12 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // FormWeaponDetails
+            // FormWeaponDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(879, 326);
+            this.ControlBox = false;
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnRemoveAllowed);
@@ -313,9 +314,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "FormWeaponDetails";
+            this.Name = "FormWeaponDetail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Weapon Details";
-            this.Load += new System.EventHandler(this.FormWeaponDetail_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

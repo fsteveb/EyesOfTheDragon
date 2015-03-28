@@ -30,8 +30,8 @@ namespace RpgEditor
         public FormEntityData()
         {
             InitializeComponent();
-
             this.Load += new EventHandler(FormEntityData_Load);
+            this.FormClosing += new FormClosingEventHandler(FormEntityData_FormClosing);
             btnOK.Click += new EventHandler(btnOK_Click);
             btnCancel.Click += new EventHandler(btnCancel_Click);
         }
@@ -51,6 +51,14 @@ namespace RpgEditor
                 tbHealth.Text = entityData.HealthFormula;
                 tbStamina.Text = entityData.StaminaFormula;
                 tbMana.Text = entityData.MagicFormula;
+            }
+        }
+
+        void FormEntityData_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
             }
         }
 
@@ -116,16 +124,19 @@ namespace RpgEditor
                 con,
                 tbHealth.Text,
                 tbStamina.Text,
-                tbHealth.Text);
+                tbMana.Text);
+
+            this.FormClosing -= FormEntityData_FormClosing;
+
             this.Close();
         }
 
         void btnCancel_Click(object sender, EventArgs e)
         {
             entityData = null;
+            this.FormClosing -= FormEntityData_FormClosing;
             this.Close();
         }
         #endregion
-
     }
 }
