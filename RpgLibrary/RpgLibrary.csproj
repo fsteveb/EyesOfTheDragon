@@ -49,11 +49,26 @@
     <Compile Include="ItemClasses\BaseItem.cs" />
     <Compile Include="ItemClasses\ItemDataManager.cs" />
     <Compile Include="ItemClasses\ItemManager.cs" />
+    <Compile Include="ItemClasses\Reagent.cs" />
+    <Compile Include="ItemClasses\ReagentData.cs" />
     <Compile Include="ItemClasses\Shield.cs" />
     <Compile Include="ItemClasses\ShieldData.cs" />
     <Compile Include="ItemClasses\Weapon.cs" />
     <Compile Include="ItemClasses\WeaponData.cs" />
+    <Compile Include="Mechanics.cs" />
+    <Compile Include="Modifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SkillClasses\Recipe.cs" />
+    <Compile Include="SkillClasses\RecipeManager.cs" />
+    <Compile Include="SkillClasses\Skill.cs" />
+    <Compile Include="SkillClasses\SkillData.cs" />
+    <Compile Include="SkillClasses\SkillDataManager.cs" />
+    <Compile Include="SpellClasses\Spell.cs" />
+    <Compile Include="SpellClasses\SpellData.cs" />
+    <Compile Include="SpellClasses\SpellDataManager.cs" />
+    <Compile Include="TalentClasses\Talent.cs" />
+    <Compile Include="TalentClasses\TalentData.cs" />
+    <Compile Include="TalentClasses\TalentDataManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -143,5 +143,19 @@ namespace RpgEditor
             lbDetails.Items.Add(shieldData);
         }
         #endregion
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FormShield
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(803, 503);
+            this.Name = "FormShield";
+            this.Text = "Shields";
+            this.ResumeLayout(false);
+
+        }
     }
 }

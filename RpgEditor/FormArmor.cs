@@ -143,5 +143,19 @@ namespace RpgEditor
             lbDetails.Items.Add(armorData);
         }
         #endregion
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FormArmor
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(803, 503);
+            this.Name = "FormArmor";
+            this.Text = "Armor";
+            this.ResumeLayout(false);
+
+        }
     }
 }

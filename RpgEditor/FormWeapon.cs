@@ -145,5 +145,19 @@ namespace RpgEditor
             lbDetails.Items.Add(weaponData);
         }
         #endregion
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FormWeapon
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(803, 503);
+            this.Name = "FormWeapon";
+            this.Text = "Weapons";
+            this.ResumeLayout(false);
+
+        }
     }
 }
