@@ -56,10 +56,13 @@ namespace RpgEditor
         {
             InitializeComponent();
 
+            this.FormClosing += new FormClosingEventHandler(FormMain_FormClosing);
+
             newGameToolStripMenuItem.Click += new EventHandler(newGameToolStripMenuItem_Click);
             openGameToolStripMenuItem.Click += new EventHandler(openGameToolStripMenuItem_Click);
             saveGameToolStripMenuItem.Click += new EventHandler(saveGameToolStripMenuItem_Click);
             exitGameToolStripMenuItem.Click += new EventHandler(exitToolStripMenuItem_Click);
+
             classesToolStripMenuItem.Click += new EventHandler(classesToolStripMenuItem_Click);
             armorToolStripMenuItem.Click += new EventHandler(armorToolStripMenuItem_Click);
             shieldToolStripMenuItem.Click += new EventHandler(shieldToolStripMenuItem_Click);
@@ -68,6 +71,18 @@ namespace RpgEditor
         #endregion
 
         #region Menu Item Event Handler Region
+        void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Unsaved changes will be lost. Are you sure you want to exit?",
+                "Exit?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.No)
+                e.Cancel = true;
+        }
+
         void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormNewGame frmNewGame = new FormNewGame())

@@ -117,26 +117,26 @@
             // weaponsToolStripMenuItem
             // 
             this.weaponsToolStripMenuItem.Name = "weaponsToolStripMenuItem";
-            this.weaponsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.weaponsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.weaponsToolStripMenuItem.Text = "&Weapons";
             // 
             // armorToolStripMenuItem
             // 
             this.armorToolStripMenuItem.Name = "armorToolStripMenuItem";
-            this.armorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.armorToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.armorToolStripMenuItem.Text = "&Armor";
             // 
             // shieldToolStripMenuItem
             // 
             this.shieldToolStripMenuItem.Name = "shieldToolStripMenuItem";
-            this.shieldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.shieldToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.shieldToolStripMenuItem.Text = "&Shield";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1009, 547);
+            this.ClientSize = new System.Drawing.Size(1009, 624);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;

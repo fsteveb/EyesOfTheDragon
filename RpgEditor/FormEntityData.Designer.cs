@@ -147,7 +147,7 @@
             this.tbName.Location = new System.Drawing.Point(110, 17);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(276, 20);
-            this.tbName.TabIndex = 10;
+            this.tbName.TabIndex = 0;
             // 
             // mtbStrength
             // 
@@ -155,7 +155,7 @@
             this.mtbStrength.Mask = "00";
             this.mtbStrength.Name = "mtbStrength";
             this.mtbStrength.Size = new System.Drawing.Size(100, 20);
-            this.mtbStrength.TabIndex = 11;
+            this.mtbStrength.TabIndex = 1;
             this.mtbStrength.Text = "10";
             // 
             // mtbDexterity
@@ -164,7 +164,7 @@
             this.mtbDexterity.Mask = "00";
             this.mtbDexterity.Name = "mtbDexterity";
             this.mtbDexterity.Size = new System.Drawing.Size(100, 20);
-            this.mtbDexterity.TabIndex = 11;
+            this.mtbDexterity.TabIndex = 2;
             this.mtbDexterity.Text = "10";
             // 
             // mtbCunning
@@ -173,7 +173,7 @@
             this.mtbCunning.Mask = "00";
             this.mtbCunning.Name = "mtbCunning";
             this.mtbCunning.Size = new System.Drawing.Size(100, 20);
-            this.mtbCunning.TabIndex = 11;
+            this.mtbCunning.TabIndex = 3;
             this.mtbCunning.Text = "10";
             // 
             // mtbWillpower
@@ -182,7 +182,7 @@
             this.mtbWillpower.Mask = "00";
             this.mtbWillpower.Name = "mtbWillpower";
             this.mtbWillpower.Size = new System.Drawing.Size(100, 20);
-            this.mtbWillpower.TabIndex = 11;
+            this.mtbWillpower.TabIndex = 4;
             this.mtbWillpower.Text = "10";
             // 
             // mtbMagic
@@ -191,7 +191,7 @@
             this.mtbMagic.Mask = "00";
             this.mtbMagic.Name = "mtbMagic";
             this.mtbMagic.Size = new System.Drawing.Size(100, 20);
-            this.mtbMagic.TabIndex = 11;
+            this.mtbMagic.TabIndex = 5;
             this.mtbMagic.Text = "10";
             // 
             // mtbConstitution
@@ -200,7 +200,7 @@
             this.mtbConstitution.Mask = "00";
             this.mtbConstitution.Name = "mtbConstitution";
             this.mtbConstitution.Size = new System.Drawing.Size(100, 20);
-            this.mtbConstitution.TabIndex = 11;
+            this.mtbConstitution.TabIndex = 6;
             this.mtbConstitution.Text = "10";
             // 
             // tbHealth
@@ -208,21 +208,21 @@
             this.tbHealth.Location = new System.Drawing.Point(110, 238);
             this.tbHealth.Name = "tbHealth";
             this.tbHealth.Size = new System.Drawing.Size(276, 20);
-            this.tbHealth.TabIndex = 12;
+            this.tbHealth.TabIndex = 7;
             // 
             // tbStamina
             // 
             this.tbStamina.Location = new System.Drawing.Point(109, 270);
             this.tbStamina.Name = "tbStamina";
             this.tbStamina.Size = new System.Drawing.Size(276, 20);
-            this.tbStamina.TabIndex = 12;
+            this.tbStamina.TabIndex = 8;
             // 
             // tbMana
             // 
             this.tbMana.Location = new System.Drawing.Point(109, 302);
             this.tbMana.Name = "tbMana";
             this.tbMana.Size = new System.Drawing.Size(276, 20);
-            this.tbMana.TabIndex = 12;
+            this.tbMana.TabIndex = 9;
             // 
             // btnOK
             // 
@@ -230,7 +230,7 @@
             this.btnOK.Location = new System.Drawing.Point(114, 328);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 13;
+            this.btnOK.TabIndex = 10;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
@@ -240,7 +240,7 @@
             this.btnCancel.Location = new System.Drawing.Point(223, 328);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 14;
+            this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 

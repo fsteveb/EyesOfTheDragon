@@ -143,14 +143,14 @@
             this.tbName.Location = new System.Drawing.Point(113, 10);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(143, 20);
-            this.tbName.TabIndex = 9;
+            this.tbName.TabIndex = 0;
             // 
             // tbType
             // 
             this.tbType.Location = new System.Drawing.Point(113, 45);
             this.tbType.Name = "tbType";
             this.tbType.Size = new System.Drawing.Size(143, 20);
-            this.tbType.TabIndex = 10;
+            this.tbType.TabIndex = 1;
             // 
             // mtbPrice
             // 
@@ -158,7 +158,7 @@
             this.mtbPrice.Mask = "00000";
             this.mtbPrice.Name = "mtbPrice";
             this.mtbPrice.Size = new System.Drawing.Size(143, 20);
-            this.mtbPrice.TabIndex = 11;
+            this.mtbPrice.TabIndex = 2;
             // 
             // nudWeight
             // 
@@ -166,7 +166,7 @@
             this.nudWeight.Location = new System.Drawing.Point(113, 118);
             this.nudWeight.Name = "nudWeight";
             this.nudWeight.Size = new System.Drawing.Size(143, 20);
-            this.nudWeight.TabIndex = 12;
+            this.nudWeight.TabIndex = 3;
             // 
             // cboHands
             // 
@@ -175,7 +175,7 @@
             this.cboHands.Location = new System.Drawing.Point(113, 153);
             this.cboHands.Name = "cboHands";
             this.cboHands.Size = new System.Drawing.Size(143, 21);
-            this.cboHands.TabIndex = 13;
+            this.cboHands.TabIndex = 4;
             // 
             // mtbAttackValue
             // 
@@ -183,7 +183,7 @@
             this.mtbAttackValue.Mask = "000";
             this.mtbAttackValue.Name = "mtbAttackValue";
             this.mtbAttackValue.Size = new System.Drawing.Size(143, 20);
-            this.mtbAttackValue.TabIndex = 14;
+            this.mtbAttackValue.TabIndex = 5;
             // 
             // mtbAttackModifier
             // 
@@ -191,7 +191,7 @@
             this.mtbAttackModifier.Mask = "000";
             this.mtbAttackModifier.Name = "mtbAttackModifier";
             this.mtbAttackModifier.Size = new System.Drawing.Size(143, 20);
-            this.mtbAttackModifier.TabIndex = 14;
+            this.mtbAttackModifier.TabIndex = 6;
             // 
             // mtbDamageValue
             // 
@@ -199,7 +199,7 @@
             this.mtbDamageValue.Mask = "000";
             this.mtbDamageValue.Name = "mtbDamageValue";
             this.mtbDamageValue.Size = new System.Drawing.Size(143, 20);
-            this.mtbDamageValue.TabIndex = 14;
+            this.mtbDamageValue.TabIndex = 7;
             // 
             // mtbDamageModifier
             // 
@@ -207,7 +207,7 @@
             this.mtbDamageModifier.Mask = "000";
             this.mtbDamageModifier.Name = "mtbDamageModifier";
             this.mtbDamageModifier.Size = new System.Drawing.Size(143, 20);
-            this.mtbDamageModifier.TabIndex = 14;
+            this.mtbDamageModifier.TabIndex = 8;
             // 
             // label10
             // 
@@ -224,14 +224,14 @@
             this.lbClasses.Location = new System.Drawing.Point(301, 48);
             this.lbClasses.Name = "lbClasses";
             this.lbClasses.Size = new System.Drawing.Size(216, 238);
-            this.lbClasses.TabIndex = 16;
+            this.lbClasses.TabIndex = 9;
             // 
             // btnMoveAllowed
             // 
             this.btnMoveAllowed.Location = new System.Drawing.Point(543, 116);
             this.btnMoveAllowed.Name = "btnMoveAllowed";
             this.btnMoveAllowed.Size = new System.Drawing.Size(75, 23);
-            this.btnMoveAllowed.TabIndex = 17;
+            this.btnMoveAllowed.TabIndex = 10;
             this.btnMoveAllowed.Text = ">>";
             this.btnMoveAllowed.UseVisualStyleBackColor = true;
             // 
@@ -240,7 +240,7 @@
             this.btnRemoveAllowed.Location = new System.Drawing.Point(543, 178);
             this.btnRemoveAllowed.Name = "btnRemoveAllowed";
             this.btnRemoveAllowed.Size = new System.Drawing.Size(75, 23);
-            this.btnRemoveAllowed.TabIndex = 18;
+            this.btnRemoveAllowed.TabIndex = 11;
             this.btnRemoveAllowed.Text = "<<";
             this.btnRemoveAllowed.UseVisualStyleBackColor = true;
             // 
@@ -259,7 +259,7 @@
             this.lbAllowedClasses.Location = new System.Drawing.Point(643, 53);
             this.lbAllowedClasses.Name = "lbAllowedClasses";
             this.lbAllowedClasses.Size = new System.Drawing.Size(216, 238);
-            this.lbAllowedClasses.TabIndex = 16;
+            this.lbAllowedClasses.TabIndex = 12;
             // 
             // btnOK
             // 
@@ -267,7 +267,7 @@
             this.btnOK.Location = new System.Drawing.Point(502, 293);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 19;
+            this.btnOK.TabIndex = 13;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
@@ -277,11 +277,11 @@
             this.btnCancel.Location = new System.Drawing.Point(583, 293);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 20;
+            this.btnCancel.TabIndex = 14;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // FormWeaponDetail
+            // FormWeaponDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -314,7 +314,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "FormWeaponDetail";
+            this.Name = "FormWeaponDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Weapon Details";
             ((System.ComponentModel.ISupportInitialize)(this.nudWeight)).EndInit();

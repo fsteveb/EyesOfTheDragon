@@ -59,7 +59,7 @@
             this.tbName.Location = new System.Drawing.Point(105, 26);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(258, 20);
-            this.tbName.TabIndex = 2;
+            this.tbName.TabIndex = 0;
             // 
             // tbDescription
             // 
@@ -67,7 +67,7 @@
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(377, 213);
-            this.tbDescription.TabIndex = 3;
+            this.tbDescription.TabIndex = 1;
             // 
             // btnOK
             // 
@@ -75,7 +75,7 @@
             this.btnOK.Location = new System.Drawing.Point(120, 281);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 4;
+            this.btnOK.TabIndex = 2;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
@@ -85,7 +85,7 @@
             this.btnCancel.Location = new System.Drawing.Point(213, 281);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
