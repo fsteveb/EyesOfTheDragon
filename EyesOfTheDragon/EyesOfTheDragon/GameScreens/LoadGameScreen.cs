@@ -41,25 +41,30 @@ namespace EyesOfTheDragon.GameScreens
             base.LoadContent();
             ContentManager Content = Game.Content;
             backgroundImage = new PictureBox(
-            Content.Load<Texture2D>(@"Backgrounds\titlescreen"),
-            GameRef.ScreenRectangle);
+                Content.Load<Texture2D>(@"Backgrounds\titlescreen"),
+                GameRef.ScreenRectangle);
             ControlManager.Add(backgroundImage);
+
             loadLinkLabel = new LinkLabel();
             loadLinkLabel.Text = "Select game";
             loadLinkLabel.Position = new Vector2(50, 100);
             loadLinkLabel.Selected += new EventHandler(loadLinkLabel_Selected);
             ControlManager.Add(loadLinkLabel);
+
             exitLinkLabel = new LinkLabel();
             exitLinkLabel.Text = "Back";
             exitLinkLabel.Position = new Vector2(50, 100 + exitLinkLabel.SpriteFont.LineSpacing);
             exitLinkLabel.Selected += new EventHandler(exitLinkLabel_Selected);
             ControlManager.Add(exitLinkLabel);
+
             loadListBox = new ListBox(
             Content.Load<Texture2D>(@"GUI\listBoxImage"),
             Content.Load<Texture2D>(@"GUI\rightarrowUp"));
+
             loadListBox.Position = new Vector2(400, 100);
             loadListBox.Selected += new EventHandler(loadListBox_Selected);
             loadListBox.Leave += new EventHandler(loadListBox_Leave);
+
             for (int i = 0; i < 20; i++)
                 loadListBox.Items.Add("Game number: " + i.ToString());
             ControlManager.Add(loadListBox);
@@ -100,6 +105,7 @@ namespace EyesOfTheDragon.GameScreens
             loadListBox.HasFocus = false;
             ControlManager.AcceptInput = true;
             StateManager.ChangeState(GameRef.GamePlayScreen);
+
             CreatePlayer();
             CreateWorld();
         }
@@ -112,6 +118,7 @@ namespace EyesOfTheDragon.GameScreens
         private void CreatePlayer()
         {
             Dictionary<AnimationKey, Animation> animations = new Dictionary<AnimationKey, Animation>();
+
             Animation animation = new Animation(3, 32, 32, 0, 0);
             animations.Add(AnimationKey.Down, animation);
             animation = new Animation(3, 32, 32, 0, 32);
@@ -120,6 +127,7 @@ namespace EyesOfTheDragon.GameScreens
             animations.Add(AnimationKey.Right, animation);
             animation = new Animation(3, 32, 32, 0, 96);
             animations.Add(AnimationKey.Up, animation);
+
             AnimatedSprite sprite = new AnimatedSprite(
                 GameRef.Content.Load<Texture2D>(@"PlayerSprites\malefighter"),
                 animations);
