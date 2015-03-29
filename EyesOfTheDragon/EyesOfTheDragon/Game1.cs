@@ -31,7 +31,9 @@ namespace EyesOfTheDragon
         public TitleScreen TitleScreen;
         public StartMenuScreen StartMenuScreen;
         public GamePlayScreen GamePlayScreen;
-        public CharacterGeneratorScreen CharacterGeneratorScreen;
+        public CharacterGeneratorScreen CharacterGeneratorScreen;
+        public LoadGameScreen LoadGameScreen;
+        public SkillScreen SkillScreen;
         #endregion
 
         #region Screen Field Region
@@ -46,6 +48,7 @@ namespace EyesOfTheDragon
 
             graphics.PreferredBackBufferWidth = screenWidth;
             graphics.PreferredBackBufferHeight = screenHeight;
+
             ScreenRectangle = new Rectangle(
                 0,
                 0,
@@ -62,7 +65,9 @@ namespace EyesOfTheDragon
             TitleScreen = new TitleScreen(this, stateManager);
             StartMenuScreen = new GameScreens.StartMenuScreen(this, stateManager);
             GamePlayScreen = new GamePlayScreen(this, stateManager);
-            CharacterGeneratorScreen = new CharacterGeneratorScreen(this, stateManager);
+            CharacterGeneratorScreen = new CharacterGeneratorScreen(this, stateManager);
+            LoadGameScreen = new LoadGameScreen(this, stateManager);
+            SkillScreen = new GameScreens.SkillScreen(this, stateManager);
             stateManager.ChangeState(TitleScreen);
         }
 

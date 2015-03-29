@@ -97,8 +97,7 @@ namespace EyesOfTheDragon.GameScreens
             Label label1 = new Label();
             label1.Text = "Who will search for the Eyes of the Dragon?";
             label1.Size = label1.SpriteFont.MeasureString(label1.Text);
-            label1.Position = new Vector2((GameRef.Window.ClientBounds.Width - label1.Size.X) /
-                2, 150);
+            label1.Position = new Vector2((GameRef.Window.ClientBounds.Width - label1.Size.X) / 2, 150);
             ControlManager.Add(label1);
 
             genderSelector = new LeftRightSelector(leftTexture, rightTexture, stopTexture);
@@ -151,10 +150,12 @@ namespace EyesOfTheDragon.GameScreens
         void linkLabel1_Selected(object sender, EventArgs e)
         {
             InputHandler.Flush();
-            StateManager.ChangeState(GameRef.GamePlayScreen);
 
             CreatePlayer();
             CreateWorld();
+
+            GameRef.SkillScreen.SkillPoints = 25;
+            StateManager.ChangeState(GameRef.SkillScreen);
         }
 
         private void CreatePlayer()
