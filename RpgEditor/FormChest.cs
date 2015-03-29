@@ -8,12 +8,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-using RpgLibrary.CharacterClasses;
 using RpgLibrary.ItemClasses;
 
 namespace RpgEditor
 {
-    public partial class FormWeapon : FormDetails
+    public partial class FormChest : FormDetails
     {
         #region Field Region
         #endregion
@@ -22,7 +21,7 @@ namespace RpgEditor
         #endregion
 
         #region Constructor Region
-        public FormWeapon()
+        public FormChest()
         {
             InitializeComponent();
 
@@ -32,15 +31,15 @@ namespace RpgEditor
         }
         #endregion
 
-        #region Button Event Handler Region
+        #region Event Handler Region
         void btnAdd_Click(object sender, EventArgs e)
         {
-            using (FormWeaponDetails frmWeaponDetails = new FormWeaponDetails())
+            using (FormChestDetails frmChestDetails = new FormChestDetails())
             {
-                frmWeaponDetails.ShowDialog();
-                if (frmWeaponDetails.Weapon != null)
+                frmChestDetails.ShowDialog();
+                if (frmChestDetails.Chest != null)
                 {
-                    AddWeapon(frmWeaponDetails.Weapon);
+                    AddChest(frmChestDetails.Chest);
                 }
             }
         }
@@ -52,24 +51,24 @@ namespace RpgEditor
                 string detail = lbDetails.SelectedItem.ToString();
                 string[] parts = detail.Split(',');
                 string entity = parts[0].Trim();
-                WeaponData data = itemManager.WeaponData[entity];
-                WeaponData newData = null;
+                ChestData data = itemManager.ChestData[entity];
+                ChestData newData = null;
 
-                using (FormWeaponDetails frmWeaponData = new FormWeaponDetails())
+                using (FormChestDetails frmChestData = new FormChestDetails())
                 {
-                    frmWeaponData.Weapon = data;
-                    frmWeaponData.ShowDialog();
-                    if (frmWeaponData.Weapon == null)
+                    frmChestData.Chest = data;
+                    frmChestData.ShowDialog();
+                    if (frmChestData.Chest == null)
                         return;
 
-                    if (frmWeaponData.Weapon.Name == entity)
+                    if (frmChestData.Chest.Name == entity)
                     {
-                        itemManager.WeaponData[entity] = frmWeaponData.Weapon;
+                        itemManager.ChestData[entity] = frmChestData.Chest;
                         FillListBox();
                         return;
                     }
 
-                    newData = frmWeaponData.Weapon;
+                    newData = frmChestData.Chest;
                 }
 
                 DialogResult result = MessageBox.Show(
@@ -80,14 +79,14 @@ namespace RpgEditor
                 if (result == DialogResult.No)
                     return;
 
-                if (itemManager.WeaponData.ContainsKey(newData.Name))
+                if (itemManager.ChestData.ContainsKey(newData.Name))
                 {
                     MessageBox.Show("Entry already exists. Use Edit to modify the entry.");
                     return;
                 }
 
                 lbDetails.Items.Add(newData);
-                itemManager.WeaponData.Add(newData.Name, newData);
+                itemManager.ChestData.Add(newData.Name, newData);
             }
         }
 
@@ -107,10 +106,10 @@ namespace RpgEditor
                 if (result == DialogResult.Yes)
                 {
                     lbDetails.Items.RemoveAt(lbDetails.SelectedIndex);
-                    itemManager.WeaponData.Remove(entity);
+                    itemManager.ChestData.Remove(entity);
 
-                    if (File.Exists(FormMain.ItemPath + @"\Weapon\" + entity + ".xml"))
-                        File.Delete(FormMain.ItemPath + @"\Weapon\" + entity + ".xml");
+                    if (File.Exists(FormMain.ItemPath + @"\Chest\" + entity + ".xml"))
+                        File.Delete(FormMain.ItemPath + @"\Chest\" + entity + ".xml");
                 }
             }
         }
@@ -121,44 +120,29 @@ namespace RpgEditor
         {
             lbDetails.Items.Clear();
 
-            foreach (string s in FormDetails.ItemManager.WeaponData.Keys)
-                lbDetails.Items.Add(FormDetails.ItemManager.WeaponData[s]);
+            foreach (string s in FormDetails.ItemManager.ChestData.Keys)
+                lbDetails.Items.Add(FormDetails.ItemManager.ChestData[s]);
         }
 
-        private void AddWeapon(WeaponData weaponData)
+        private void AddChest(ChestData ChestData)
         {
-            if (FormDetails.ItemManager.WeaponData.ContainsKey(weaponData.Name))
+            if (FormDetails.ItemManager.ChestData.ContainsKey(ChestData.Name))
             {
                 DialogResult result = MessageBox.Show(
-                    weaponData.Name + " already exists. Overwrite it?",
-                    "Existing weapon",
+                    ChestData.Name + " already exists. Overwrite it?",
+                    "Existing Chest",
                     MessageBoxButtons.YesNo);
-
                 if (result == DialogResult.No)
                     return;
 
-                itemManager.WeaponData[weaponData.Name] = weaponData;
+                itemManager.ChestData[ChestData.Name] = ChestData;
                 FillListBox();
                 return;
             }
 
-            itemManager.WeaponData.Add(weaponData.Name, weaponData);
-            lbDetails.Items.Add(weaponData);
+            itemManager.ChestData.Add(ChestData.Name, ChestData);
+            lbDetails.Items.Add(ChestData);
         }
         #endregion
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // FormWeapon
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(803, 503);
-            this.Name = "FormWeapon";
-            this.Text = "Weapons";
-            this.ResumeLayout(false);
-
-        }
     }
 }

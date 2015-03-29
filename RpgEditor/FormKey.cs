@@ -13,7 +13,7 @@ using RpgLibrary.ItemClasses;
 
 namespace RpgEditor
 {
-    public partial class FormWeapon : FormDetails
+    public partial class FormKey : FormDetails
     {
         #region Field Region
         #endregion
@@ -22,7 +22,7 @@ namespace RpgEditor
         #endregion
 
         #region Constructor Region
-        public FormWeapon()
+        public FormKey()
         {
             InitializeComponent();
 
@@ -32,15 +32,15 @@ namespace RpgEditor
         }
         #endregion
 
-        #region Button Event Handler Region
+        #region Event Handler Region
         void btnAdd_Click(object sender, EventArgs e)
         {
-            using (FormWeaponDetails frmWeaponDetails = new FormWeaponDetails())
+            using (FormKeyDetails frmKeyDetails = new FormKeyDetails())
             {
-                frmWeaponDetails.ShowDialog();
-                if (frmWeaponDetails.Weapon != null)
+                frmKeyDetails.ShowDialog();
+                if (frmKeyDetails.Key != null)
                 {
-                    AddWeapon(frmWeaponDetails.Weapon);
+                    AddKey(frmKeyDetails.Key);
                 }
             }
         }
@@ -52,24 +52,24 @@ namespace RpgEditor
                 string detail = lbDetails.SelectedItem.ToString();
                 string[] parts = detail.Split(',');
                 string entity = parts[0].Trim();
-                WeaponData data = itemManager.WeaponData[entity];
-                WeaponData newData = null;
+                KeyData data = itemManager.KeyData[entity];
+                KeyData newData = null;
 
-                using (FormWeaponDetails frmWeaponData = new FormWeaponDetails())
+                using (FormKeyDetails frmKeyData = new FormKeyDetails())
                 {
-                    frmWeaponData.Weapon = data;
-                    frmWeaponData.ShowDialog();
-                    if (frmWeaponData.Weapon == null)
+                    frmKeyData.Key = data;
+                    frmKeyData.ShowDialog();
+                    if (frmKeyData.Key == null)
                         return;
 
-                    if (frmWeaponData.Weapon.Name == entity)
+                    if (frmKeyData.Key.Name == entity)
                     {
-                        itemManager.WeaponData[entity] = frmWeaponData.Weapon;
+                        itemManager.KeyData[entity] = frmKeyData.Key;
                         FillListBox();
                         return;
                     }
 
-                    newData = frmWeaponData.Weapon;
+                    newData = frmKeyData.Key;
                 }
 
                 DialogResult result = MessageBox.Show(
@@ -79,15 +79,15 @@ namespace RpgEditor
 
                 if (result == DialogResult.No)
                     return;
-
-                if (itemManager.WeaponData.ContainsKey(newData.Name))
+                
+                if (itemManager.KeyData.ContainsKey(newData.Name))
                 {
                     MessageBox.Show("Entry already exists. Use Edit to modify the entry.");
                     return;
                 }
 
                 lbDetails.Items.Add(newData);
-                itemManager.WeaponData.Add(newData.Name, newData);
+                itemManager.KeyData.Add(newData.Name, newData);
             }
         }
 
@@ -98,7 +98,6 @@ namespace RpgEditor
                 string detail = (string)lbDetails.SelectedItem;
                 string[] parts = detail.Split(',');
                 string entity = parts[0].Trim();
-
                 DialogResult result = MessageBox.Show(
                     "Are you sure you want to delete " + entity + "?",
                     "Delete",
@@ -107,10 +106,9 @@ namespace RpgEditor
                 if (result == DialogResult.Yes)
                 {
                     lbDetails.Items.RemoveAt(lbDetails.SelectedIndex);
-                    itemManager.WeaponData.Remove(entity);
-
-                    if (File.Exists(FormMain.ItemPath + @"\Weapon\" + entity + ".xml"))
-                        File.Delete(FormMain.ItemPath + @"\Weapon\" + entity + ".xml");
+                    itemManager.KeyData.Remove(entity);
+                    if (File.Exists(FormMain.ItemPath + @"\Key\" + entity + ".xml"))
+                        File.Delete(FormMain.ItemPath + @"\Key\" + entity + ".xml");
                 }
             }
         }
@@ -120,45 +118,29 @@ namespace RpgEditor
         public void FillListBox()
         {
             lbDetails.Items.Clear();
-
-            foreach (string s in FormDetails.ItemManager.WeaponData.Keys)
-                lbDetails.Items.Add(FormDetails.ItemManager.WeaponData[s]);
+            foreach (string s in FormDetails.ItemManager.KeyData.Keys)
+                lbDetails.Items.Add(FormDetails.ItemManager.KeyData[s]);
         }
 
-        private void AddWeapon(WeaponData weaponData)
+        private void AddKey(KeyData keyData)
         {
-            if (FormDetails.ItemManager.WeaponData.ContainsKey(weaponData.Name))
+            if (FormDetails.ItemManager.KeyData.ContainsKey(keyData.Name))
             {
                 DialogResult result = MessageBox.Show(
-                    weaponData.Name + " already exists. Overwrite it?",
-                    "Existing weapon",
+                    keyData.Name + " already exists. Overwrite it?",
+                    "Existing key",
                     MessageBoxButtons.YesNo);
-
                 if (result == DialogResult.No)
                     return;
 
-                itemManager.WeaponData[weaponData.Name] = weaponData;
+                itemManager.KeyData[keyData.Name] = keyData;
                 FillListBox();
                 return;
             }
 
-            itemManager.WeaponData.Add(weaponData.Name, weaponData);
-            lbDetails.Items.Add(weaponData);
+            itemManager.KeyData.Add(keyData.Name, keyData);
+            lbDetails.Items.Add(keyData);
         }
         #endregion
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // FormWeapon
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(803, 503);
-            this.Name = "FormWeapon";
-            this.Text = "Weapons";
-            this.ResumeLayout(false);
-
-        }
     }
 }
