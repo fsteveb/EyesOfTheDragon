@@ -37,7 +37,7 @@
             this.exitGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.classesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.weaponsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.weaponToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.armorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shieldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.keysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,30 +74,30 @@
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newGameToolStripMenuItem.Text = "&New Game";
             // 
             // openGameToolStripMenuItem
             // 
             this.openGameToolStripMenuItem.Name = "openGameToolStripMenuItem";
-            this.openGameToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.openGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openGameToolStripMenuItem.Text = "&Open Game";
             // 
             // saveGameToolStripMenuItem
             // 
             this.saveGameToolStripMenuItem.Name = "saveGameToolStripMenuItem";
-            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveGameToolStripMenuItem.Text = "&Save Game";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(134, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitGameToolStripMenuItem
             // 
             this.exitGameToolStripMenuItem.Name = "exitGameToolStripMenuItem";
-            this.exitGameToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.exitGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitGameToolStripMenuItem.Text = "E&xit Game";
             // 
             // classesToolStripMenuItem
@@ -110,7 +110,7 @@
             // itemsToolStripMenuItem
             // 
             this.itemsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.weaponsToolStripMenuItem,
+            this.weaponToolStripMenuItem,
             this.armorToolStripMenuItem,
             this.shieldToolStripMenuItem});
             this.itemsToolStripMenuItem.Enabled = false;
@@ -118,22 +118,22 @@
             this.itemsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.itemsToolStripMenuItem.Text = "&Items";
             // 
-            // weaponsToolStripMenuItem
+            // weaponToolStripMenuItem
             // 
-            this.weaponsToolStripMenuItem.Name = "weaponsToolStripMenuItem";
-            this.weaponsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.weaponsToolStripMenuItem.Text = "&Weapons";
+            this.weaponToolStripMenuItem.Name = "weaponToolStripMenuItem";
+            this.weaponToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.weaponToolStripMenuItem.Text = "&Weapons";
             // 
             // armorToolStripMenuItem
             // 
             this.armorToolStripMenuItem.Name = "armorToolStripMenuItem";
-            this.armorToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.armorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.armorToolStripMenuItem.Text = "&Armor";
             // 
             // shieldToolStripMenuItem
             // 
             this.shieldToolStripMenuItem.Name = "shieldToolStripMenuItem";
-            this.shieldToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.shieldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.shieldToolStripMenuItem.Text = "&Shield";
             // 
             // keysToolStripMenuItem
@@ -179,7 +179,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem classesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem weaponsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem weaponToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem armorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shieldToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem keysToolStripMenuItem;

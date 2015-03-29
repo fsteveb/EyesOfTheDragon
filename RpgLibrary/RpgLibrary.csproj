@@ -68,6 +68,7 @@
     <Compile Include="QuestClasses\Quest.cs" />
     <Compile Include="QuestClasses\QuestManager.cs" />
     <Compile Include="QuestClasses\QuestStep.cs" />
+    <Compile Include="RolePlayingGame.cs" />
     <Compile Include="SkillClasses\Recipe.cs" />
     <Compile Include="SkillClasses\RecipeManager.cs" />
     <Compile Include="SkillClasses\Skill.cs" />

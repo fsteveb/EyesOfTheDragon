@@ -140,5 +140,45 @@ namespace RpgEditor
                 WeaponData weaponData = XnaSerializer.Deserialize<WeaponData>(s);
                 itemManager.WeaponData.Add(weaponData.Name, weaponData);
             }
+        }
+
+        public static void WriteKeyData()
+        {
+            foreach (string s in ItemManager.KeyData.Keys)
+            {
+                XnaSerializer.Serialize<KeyData>(
+                    FormMain.KeyPath + @"\" + s + ".xml",
+                    ItemManager.KeyData[s]);
+            }
+        }
+
+        public static void WriteChestData()
+        {
+            foreach (string s in ItemManager.ChestData.Keys)
+            {
+                XnaSerializer.Serialize<ChestData>(
+                    FormMain.ChestPath + @"\" + s + ".xml",
+                    ItemManager.ChestData[s]);
+            }
+        }
+
+        public static void ReadKeyData()
+        {
+            string[] fileNames = Directory.GetFiles(FormMain.KeyPath, "*.xml");
+            foreach (string s in fileNames)
+            {
+                KeyData keyData = XnaSerializer.Deserialize<KeyData>(s);
+                itemManager.KeyData.Add(keyData.Name, keyData);
+            }
+        }
+
+        public static void ReadChestData()
+        {
+            string[] fileNames = Directory.GetFiles(FormMain.ChestPath, "*.xml");
+            foreach (string s in fileNames)
+            {
+                ChestData chestData = XnaSerializer.Deserialize<ChestData>(s);
+                itemManager.ChestData.Add(chestData.Name, chestData);
+            }
         }    }
 }

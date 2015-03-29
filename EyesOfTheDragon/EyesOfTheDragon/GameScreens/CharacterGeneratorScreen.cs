@@ -64,7 +64,7 @@ namespace EyesOfTheDragon.GameScreens
 
             LoadImages();
             CreateControls();
-            containers = Game.Content.Load<Texture2D>(@"ObjectSprites\containers");
+            containers = Game.Content.Load<Texture2D>(@"ObjectSprites\crate1");
         }
 
         public override void Update(GameTime gameTime)
@@ -205,6 +205,7 @@ namespace EyesOfTheDragon.GameScreens
                 int x = random.Next(0, 100);
                 int y = random.Next(0, 100);
                 int index = random.Next(2, 14);
+
                 Tile tile = new Tile(index, 0);
                 splatter.SetTile(x, y, tile);
             }
@@ -220,10 +221,11 @@ namespace EyesOfTheDragon.GameScreens
             TileMap map = new TileMap(tilesets, mapLayers);
             Level level = new Level(map);
 
-            ChestData chestData = new ChestData();
-            chestData.Name = "Some Chest";
-            chestData.MinGold = 10;
-            chestData.MaxGold = 101;
+            //ChestData chestData = new ChestData();
+            //chestData.Name = "Some Chest";
+            //chestData.MinGold = 10;
+            //chestData.MaxGold = 101;
+            ChestData chestData = Game.Content.Load<ChestData>(@"Game\Chests\Plain Chest");
 
             Chest chest = new Chest(chestData);
 
@@ -231,6 +233,7 @@ namespace EyesOfTheDragon.GameScreens
                 containers,
                 new Rectangle(0, 0, 32, 32),
                 new Point(10, 10));
+
             ItemSprite itemSprite = new ItemSprite(
                 chest,
                 chestSprite);
