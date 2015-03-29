@@ -8,19 +8,29 @@ namespace RpgLibrary.SkillClasses
     public class SkillData
     {
         #region Field Region
-        #endregion
-
-        #region Property Region
+        public string Name;
+        public string PrimaryAttribute;
+        public Dictionary<string, int> ClassModifiers;
         #endregion
 
         #region Constructor Region
+        public SkillData()
+        {
+            ClassModifiers = new Dictionary<string, int>();
+        }
         #endregion
 
-        #region Method Region
-        #endregion
+        #region Virtual Method Region
+        public override string ToString()
+        {
+            string toString = Name + ", ";
+            toString += PrimaryAttribute;
+            //toString += string.Join(", +", ClassModifiers.Keys);
+            foreach (string s in ClassModifiers.Keys)
+                toString += ", " + s + "+" + ClassModifiers[s].ToString();
 
-        #region Virtual Method region
+            return toString;
+        }
         #endregion
-
     }
 }

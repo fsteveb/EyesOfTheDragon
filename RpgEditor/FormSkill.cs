@@ -8,21 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-using RpgLibrary.CharacterClasses;
-using RpgLibrary.ItemClasses;
+using RpgLibrary.SkillClasses;
 
 namespace RpgEditor
 {
-    public partial class FormKey : FormDetails
+    public partial class FormSkill : FormDetails
     {
-        #region Field Region
-        #endregion
-
-        #region Property Region
-        #endregion
-
         #region Constructor Region
-        public FormKey()
+        public FormSkill()
         {
             InitializeComponent();
 
@@ -32,15 +25,15 @@ namespace RpgEditor
         }
         #endregion
 
-        #region Event Handler Region
+        #region Button Event Handler Region
         void btnAdd_Click(object sender, EventArgs e)
         {
-            using (FormKeyDetails frmKeyDetails = new FormKeyDetails())
+            using (FormSkillDetails frmSkillDetails = new FormSkillDetails())
             {
-                frmKeyDetails.ShowDialog();
-                if (frmKeyDetails.Key != null)
+                frmSkillDetails.ShowDialog();
+                if (frmSkillDetails.Skill != null)
                 {
-                    AddKey(frmKeyDetails.Key);
+                    AddSkill(frmSkillDetails.Skill);
                 }
             }
         }
@@ -52,24 +45,24 @@ namespace RpgEditor
                 string detail = lbDetails.SelectedItem.ToString();
                 string[] parts = detail.Split(',');
                 string entity = parts[0].Trim();
-                KeyData data = itemManager.KeyData[entity];
-                KeyData newData = null;
 
-                using (FormKeyDetails frmKeyData = new FormKeyDetails())
+                SkillData data = skillManager.SkillData[entity];
+                SkillData newData = null;
+
+                using (FormSkillDetails frmSkillData = new FormSkillDetails())
                 {
-                    frmKeyData.Key = data;
-                    frmKeyData.ShowDialog();
-                    if (frmKeyData.Key == null)
+                    frmSkillData.Skill = data;
+                    frmSkillData.ShowDialog();
+                    if (frmSkillData.Skill == null)
                         return;
 
-                    if (frmKeyData.Key.Name == entity)
+                    if (frmSkillData.Skill.Name == entity)
                     {
-                        itemManager.KeyData[entity] = frmKeyData.Key;
+                        skillManager.SkillData[entity] = frmSkillData.Skill;
                         FillListBox();
                         return;
                     }
-
-                    newData = frmKeyData.Key;
+                    newData = frmSkillData.Skill;
                 }
 
                 DialogResult result = MessageBox.Show(
@@ -79,15 +72,15 @@ namespace RpgEditor
 
                 if (result == DialogResult.No)
                     return;
-                
-                if (itemManager.KeyData.ContainsKey(newData.Name))
+
+                if (skillManager.SkillData.ContainsKey(newData.Name))
                 {
                     MessageBox.Show("Entry already exists. Use Edit to modify the entry.");
                     return;
                 }
 
                 lbDetails.Items.Add(newData);
-                itemManager.KeyData.Add(newData.Name, newData);
+                skillManager.SkillData.Add(newData.Name, newData);
             }
         }
 
@@ -107,9 +100,10 @@ namespace RpgEditor
                 if (result == DialogResult.Yes)
                 {
                     lbDetails.Items.RemoveAt(lbDetails.SelectedIndex);
-                    itemManager.KeyData.Remove(entity);
-                    if (File.Exists(FormMain.ItemPath + @"\" + entity + ".xml"))
-                        File.Delete(FormMain.ItemPath + @"\" + entity + ".xml");
+                    skillManager.SkillData.Remove(entity);
+
+                    if (File.Exists(FormMain.SkillPath + @"\" + entity + ".xml"))
+                        File.Delete(FormMain.SkillPath + @"\" + entity + ".xml");
                 }
             }
         }
@@ -119,28 +113,29 @@ namespace RpgEditor
         public void FillListBox()
         {
             lbDetails.Items.Clear();
-            foreach (string s in FormDetails.ItemManager.KeyData.Keys)
-                lbDetails.Items.Add(FormDetails.ItemManager.KeyData[s]);
+
+            foreach (string s in FormDetails.SkillManager.SkillData.Keys)
+                lbDetails.Items.Add(FormDetails.SkillManager.SkillData[s]);
         }
 
-        private void AddKey(KeyData keyData)
+        private void AddSkill(SkillData skillData)
         {
-            if (FormDetails.ItemManager.KeyData.ContainsKey(keyData.Name))
+            if (FormDetails.SkillManager.SkillData.ContainsKey(skillData.Name))
             {
                 DialogResult result = MessageBox.Show(
-                    keyData.Name + " already exists. Overwrite it?",
-                    "Existing key",
+                    skillData.Name + " already exists. Overwrite it?",
+                    "Existing armor",
                     MessageBoxButtons.YesNo);
                 if (result == DialogResult.No)
                     return;
 
-                itemManager.KeyData[keyData.Name] = keyData;
+                skillManager.SkillData[skillData.Name] = skillData;
                 FillListBox();
                 return;
             }
 
-            itemManager.KeyData.Add(keyData.Name, keyData);
-            lbDetails.Items.Add(keyData);
+            skillManager.SkillData.Add(skillData.Name, skillData);
+            lbDetails.Items.Add(skillData);
         }
         #endregion
     }

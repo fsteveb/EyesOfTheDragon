@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using RpgLibrary.ItemClasses;
 using RpgLibrary.CharacterClasses;
+using RpgLibrary.SkillClasses;
 
 namespace RpgEditor
 {
@@ -18,6 +19,7 @@ namespace RpgEditor
         #region Field Region
         protected static ItemDataManager itemManager;
         protected static EntityDataManager entityDataManager;
+        protected static SkillDataManager skillManager;
         #endregion
 
         #region Property Region
@@ -31,6 +33,11 @@ namespace RpgEditor
         {
             get { return entityDataManager; }
             private set { entityDataManager = value; }
+        }
+
+        public static SkillDataManager SkillManager
+        {
+            get { return skillManager; }
         }
         #endregion
 
@@ -66,6 +73,7 @@ namespace RpgEditor
         }
         #endregion
 
+        #region Method Region
         public static void WriteEntityData()
         {
             foreach (string s in EntityDataManager.EntityData.Keys)
@@ -180,5 +188,28 @@ namespace RpgEditor
                 ChestData chestData = XnaSerializer.Deserialize<ChestData>(s);
                 itemManager.ChestData.Add(chestData.Name, chestData);
             }
-        }    }
+        }
+
+        public static void WriteSkillData()
+        {
+            foreach (string s in SkillManager.SkillData.Keys)
+            {
+                XnaSerializer.Serialize<SkillData>(
+                FormMain.SkillPath + @"\" + s + ".xml",
+                SkillManager.SkillData[s]);
+            }
+        }
+
+        public static void ReadSkillData()
+        {
+            skillManager = new SkillDataManager();
+            string[] fileNames = Directory.GetFiles(FormMain.SkillPath, "*.xml");
+            foreach (string s in fileNames)
+            {
+                SkillData chestData = XnaSerializer.Deserialize<SkillData>(s);
+                skillManager.SkillData.Add(chestData.Name, chestData);
+            }
+        }
+        #endregion
+    }
 }

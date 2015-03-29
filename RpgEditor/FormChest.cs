@@ -108,8 +108,8 @@ namespace RpgEditor
                     lbDetails.Items.RemoveAt(lbDetails.SelectedIndex);
                     itemManager.ChestData.Remove(entity);
 
-                    if (File.Exists(FormMain.ItemPath + @"\Chest\" + entity + ".xml"))
-                        File.Delete(FormMain.ItemPath + @"\Chest\" + entity + ".xml");
+                    if (File.Exists(FormMain.ItemPath + @"\" + entity + ".xml"))
+                        File.Delete(FormMain.ItemPath + @"\" + entity + ".xml");
                 }
             }
         }
