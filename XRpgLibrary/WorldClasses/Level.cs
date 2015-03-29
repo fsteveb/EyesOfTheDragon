@@ -5,6 +5,7 @@ using System.Text;
 
 using XRpgLibrary.TileEngine;
 using XRpgLibrary.CharacterClasses;
+using XRpgLibrary.ItemClasses;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,6 +17,7 @@ namespace XRpgLibrary.WorldClasses
         #region Field Region
         readonly TileMap map;
         readonly List<Character> characters;
+        readonly List<ItemSprite> chests;
         #endregion
 
         #region Property Region
@@ -28,6 +30,11 @@ namespace XRpgLibrary.WorldClasses
         {
             get { return characters; }
         }
+
+        public List<ItemSprite> Chests
+        {
+            get { return chests; }
+        }
         #endregion
 
         #region Constructor Region
@@ -35,6 +42,7 @@ namespace XRpgLibrary.WorldClasses
         {
             map = tileMap;
             characters = new List<Character>();
+            chests = new List<ItemSprite>();
         }
         #endregion
 
@@ -43,13 +51,20 @@ namespace XRpgLibrary.WorldClasses
         {
             foreach (Character character in characters)
                 character.Update(gameTime);
+
+            foreach (ItemSprite sprite in chests)
+                sprite.Update(gameTime);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
         {
             map.Draw(spriteBatch, camera);
+
             foreach (Character character in characters)
                 character.Draw(gameTime, spriteBatch);
+
+            foreach (ItemSprite sprite in chests)
+                sprite.Draw(gameTime, spriteBatch);
         }
         #endregion
     }

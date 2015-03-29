@@ -50,6 +50,8 @@
     <Compile Include="ItemClasses\Armor.cs" />
     <Compile Include="ItemClasses\ArmorData.cs" />
     <Compile Include="ItemClasses\BaseItem.cs" />
+    <Compile Include="ItemClasses\Chest.cs" />
+    <Compile Include="ItemClasses\ChestData.cs" />
     <Compile Include="ItemClasses\ItemDataManager.cs" />
     <Compile Include="ItemClasses\ItemManager.cs" />
     <Compile Include="ItemClasses\Reagent.cs" />
@@ -75,6 +77,9 @@
     <Compile Include="TalentClasses\Talent.cs" />
     <Compile Include="TalentClasses\TalentData.cs" />
     <Compile Include="TalentClasses\TalentDataManager.cs" />
+    <Compile Include="TrapClasses\Trap.cs" />
+    <Compile Include="TrapClasses\TrapData.cs" />
+    <Compile Include="TrapClasses\TrapManager.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

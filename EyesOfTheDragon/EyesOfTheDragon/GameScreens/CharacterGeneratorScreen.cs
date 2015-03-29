@@ -12,6 +12,9 @@ using XRpgLibrary.Controls;
 using XRpgLibrary.SpriteClasses;
 using XRpgLibrary.TileEngine;
 using XRpgLibrary.WorldClasses;
+using XRpgLibrary.ItemClasses;
+using RpgLibrary.ItemClasses;
+
 using EyesOfTheDragon.Components;
 
 namespace EyesOfTheDragon.GameScreens
@@ -24,6 +27,7 @@ namespace EyesOfTheDragon.GameScreens
         PictureBox backgroundImage;
         PictureBox characterImage;
         Texture2D[,] characterImages;
+        Texture2D containers;
 
         string[] genderItems = { "Male", "Female" };
         string[] classItems = { "Fighter", "Wizard", "Rogue", "Priest" };
@@ -60,6 +64,7 @@ namespace EyesOfTheDragon.GameScreens
 
             LoadImages();
             CreateControls();
+            containers = Game.Content.Load<Texture2D>(@"ObjectSprites\containers");
         }
 
         public override void Update(GameTime gameTime)
@@ -176,12 +181,13 @@ namespace EyesOfTheDragon.GameScreens
 
             tilesetTexture = Game.Content.Load<Texture2D>(@"Tilesets\tileset2");
             Tileset tileset2 = new Tileset(tilesetTexture, 8, 8, 32, 32);
-            List<Tileset> tilesets = new List<Tileset>();
 
+            List<Tileset> tilesets = new List<Tileset>();
             tilesets.Add(tileset1);
             tilesets.Add(tileset2);
 
             MapLayer layer = new MapLayer(100, 100);
+
             for (int y = 0; y < layer.Height; y++)
             {
                 for (int x = 0; x < layer.Width; x++)
@@ -213,9 +219,27 @@ namespace EyesOfTheDragon.GameScreens
 
             TileMap map = new TileMap(tilesets, mapLayers);
             Level level = new Level(map);
+
+            ChestData chestData = new ChestData();
+            chestData.Name = "Some Chest";
+            chestData.MinGold = 10;
+            chestData.MaxGold = 101;
+
+            Chest chest = new Chest(chestData);
+
+            BaseSprite chestSprite = new BaseSprite(
+                containers,
+                new Rectangle(0, 0, 32, 32),
+                new Point(10, 10));
+            ItemSprite itemSprite = new ItemSprite(
+                chest,
+                chestSprite);
+            level.Chests.Add(itemSprite);
+
             World world = new World(GameRef, GameRef.ScreenRectangle);
             world.Levels.Add(level);
             world.CurrentLevel = 0;
+
             GamePlayScreen.World = world;
         }
         #endregion
