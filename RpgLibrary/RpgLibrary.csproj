@@ -44,6 +44,9 @@
     <Compile Include="CharacterClasses\Entity.cs" />
     <Compile Include="CharacterClasses\EntityData.cs" />
     <Compile Include="CharacterClasses\EntityDataManager.cs" />
+    <Compile Include="ConversationClasses\Conversation.cs" />
+    <Compile Include="ConversationClasses\ConversationManager.cs" />
+    <Compile Include="ConversationClasses\ConversationNode.cs" />
     <Compile Include="ItemClasses\Armor.cs" />
     <Compile Include="ItemClasses\ArmorData.cs" />
     <Compile Include="ItemClasses\BaseItem.cs" />
@@ -58,6 +61,9 @@
     <Compile Include="Mechanics.cs" />
     <Compile Include="Modifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestClasses\Quest.cs" />
+    <Compile Include="QuestClasses\QuestManager.cs" />
+    <Compile Include="QuestClasses\QuestStep.cs" />
     <Compile Include="SkillClasses\Recipe.cs" />
     <Compile Include="SkillClasses\RecipeManager.cs" />
     <Compile Include="SkillClasses\Skill.cs" />
@@ -70,6 +76,7 @@
     <Compile Include="TalentClasses\TalentData.cs" />
     <Compile Include="TalentClasses\TalentDataManager.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

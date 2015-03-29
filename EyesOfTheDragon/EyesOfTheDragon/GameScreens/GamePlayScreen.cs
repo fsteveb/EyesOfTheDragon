@@ -65,16 +65,19 @@ namespace EyesOfTheDragon.GameScreens
         public override void Draw(GameTime gameTime)
         {
             GameRef.SpriteBatch.Begin(
-            SpriteSortMode.Deferred,
-            BlendState.AlphaBlend,
-            SamplerState.PointClamp,
-            null,
-            null,
-            null,
-            player.Camera.Transformation);
+                SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                SamplerState.PointClamp,
+                null,
+                null,
+                null,
+                player.Camera.Transformation);
+
             base.Draw(gameTime);
-            world.DrawLevel(GameRef.SpriteBatch, player.Camera);
+
+            world.DrawLevel(gameTime, GameRef.SpriteBatch, player.Camera);
             player.Draw(gameTime, GameRef.SpriteBatch);
+
             GameRef.SpriteBatch.End();
         }
         #endregion

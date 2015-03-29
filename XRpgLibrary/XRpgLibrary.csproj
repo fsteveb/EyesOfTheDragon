@@ -59,6 +59,8 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterClasses\Character.cs" />
+    <Compile Include="CharacterClasses\NonPlayerCharacter.cs" />
     <Compile Include="Controls\ControlManager.cs" />
     <Compile Include="Controls\Control.cs" />
     <Compile Include="Controls\Label.cs" />

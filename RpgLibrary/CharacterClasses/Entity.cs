@@ -1,4 +1,7 @@
-﻿using System;
+﻿using RpgLibrary.SkillClasses;
+using RpgLibrary.SpellClasses;
+using RpgLibrary.TalentClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -138,18 +141,26 @@ namespace RpgLibrary.CharacterClasses
         #region Constructor Region
         private Entity()
         {
-            Strength = 0;
-            Dexterity = 0;
-            Cunning = 0;
-            Willpower = 0;
-            Magic = 0;
-            Constitution = 0;
+            Strength = 10;
+            Dexterity = 10;
+            Cunning = 10;
+            Willpower = 10;
+            Magic = 10;
+            Constitution = 10;
+
             health = new AttributePair(0);
             stamina = new AttributePair(0);
             mana = new AttributePair(0);
+            skills = new Dictionary<string, Skill>();
+            spells = new Dictionary<string, Spell>();
+            talents = new Dictionary<string, Talent>();
+            skillModifiers = new List<Modifier>();
+            spellModifiers = new List<Modifier>();
+            talentModifiers = new List<Modifier>();
         }
 
         public Entity(string name, EntityData entityData, EntityGender gender, EntityType entityType)
+            : this()
         {
             EntityName = name;
             EntityClass = entityData.EntityName;
@@ -165,5 +176,65 @@ namespace RpgLibrary.CharacterClasses
             stamina = new AttributePair(0);
             mana = new AttributePair(0);
         }
-        #endregion    }
+        #endregion
+
+        #region Skill Field and Property Region
+        readonly Dictionary<string, Skill> skills;
+        readonly List<Modifier> skillModifiers;
+
+        public Dictionary<string, Skill> Skills
+        {
+            get { return skills; }
+        }
+
+        public List<Modifier> SkillModifiers
+        {
+            get { return skillModifiers; }
+        }
+        #endregion
+
+        #region Spell Field and Property Region
+        readonly Dictionary<string, Spell> spells;
+        readonly List<Modifier> spellModifiers;
+
+        public Dictionary<string, Spell> Spells
+        {
+            get { return spells; }
+        }
+
+        public List<Modifier> SpellModifiers
+        {
+            get { return spellModifiers; }
+        }
+        #endregion
+
+        #region Talent Field and Property Region
+        readonly Dictionary<string, Talent> talents;
+        readonly List<Modifier> talentModifiers;
+
+        public Dictionary<string, Talent> Talents
+        {
+            get { return talents; }
+        }
+
+        public List<Modifier> TalentModifiers
+        {
+            get { return talentModifiers; }
+        }
+        #endregion
+
+        #region Method Region
+        public void Update(TimeSpan elapsedTime)
+        {
+            foreach (Modifier modifier in skillModifiers)
+                modifier.Update(elapsedTime);
+
+            foreach (Modifier modifier in spellModifiers)
+                modifier.Update(elapsedTime);
+
+            foreach (Modifier modifier in talentModifiers)
+                modifier.Update(elapsedTime);
+        }
+        #endregion
+    }
 }
