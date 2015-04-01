@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Input;
 using XRpgLibrary;
 using XRpgLibrary.TileEngine;
 using XRpgLibrary.SpriteClasses;
+using XRpgLibrary.CharacterClasses;
+
 namespace EyesOfTheDragon.Components
 {
     public class Player
@@ -17,7 +19,7 @@ namespace EyesOfTheDragon.Components
         #region Field Region
         Camera camera;
         Game1 gameRef;
-        readonly AnimatedSprite sprite;
+        readonly Character character;
         #endregion
 
         #region Property Region
@@ -29,16 +31,21 @@ namespace EyesOfTheDragon.Components
 
         public AnimatedSprite Sprite
         {
-            get { return sprite; }
+            get { return character.Sprite; }
+        }
+
+        public Character Character
+        {
+            get { return character; }
         }
         #endregion
 
         #region Constructor Region
-        public Player(Game game, AnimatedSprite sprite)
+        public Player(Game game, Character character)
         {
             gameRef = (Game1)game;
             camera = new Camera(gameRef.ScreenRectangle);
-            this.sprite = sprite;
+            this.character = character;
         }
         #endregion
 
@@ -46,86 +53,86 @@ namespace EyesOfTheDragon.Components
         public void Update(GameTime gameTime)
         {
             camera.Update(gameTime);
-            sprite.Update(gameTime);
+            Sprite.Update(gameTime);
 
             if (InputHandler.KeyReleased(Keys.PageUp) ||
-                InputHandler.ButtonReleased(Buttons.LeftShoulder, PlayerIndex.One))
+            InputHandler.ButtonReleased(Buttons.LeftShoulder, PlayerIndex.One))
             {
                 camera.ZoomIn();
                 if (camera.CameraMode == CameraMode.Follow)
-                    camera.LockToSprite(sprite);
+                    camera.LockToSprite(Sprite);
             }
             else if (InputHandler.KeyReleased(Keys.PageDown) ||
-                InputHandler.ButtonReleased(Buttons.RightShoulder, PlayerIndex.One))
+            InputHandler.ButtonReleased(Buttons.RightShoulder, PlayerIndex.One))
             {
                 camera.ZoomOut();
                 if (camera.CameraMode == CameraMode.Follow)
-                    camera.LockToSprite(sprite);
+                    camera.LockToSprite(Sprite);
             }
 
             Vector2 motion = new Vector2();
 
             if (InputHandler.KeyDown(Keys.W) ||
-                InputHandler.ButtonDown(Buttons.LeftThumbstickUp, PlayerIndex.One))
+            InputHandler.ButtonDown(Buttons.LeftThumbstickUp, PlayerIndex.One))
             {
-                sprite.CurrentAnimation = AnimationKey.Up;
+                Sprite.CurrentAnimation = AnimationKey.Up;
                 motion.Y = -1;
             }
             else if (InputHandler.KeyDown(Keys.S) ||
-                InputHandler.ButtonDown(Buttons.LeftThumbstickDown, PlayerIndex.One))
+            InputHandler.ButtonDown(Buttons.LeftThumbstickDown, PlayerIndex.One))
             {
-                sprite.CurrentAnimation = AnimationKey.Down;
+                Sprite.CurrentAnimation = AnimationKey.Down;
                 motion.Y = 1;
             }
 
             if (InputHandler.KeyDown(Keys.A) ||
-               InputHandler.ButtonDown(Buttons.LeftThumbstickLeft, PlayerIndex.One))
+            InputHandler.ButtonDown(Buttons.LeftThumbstickLeft, PlayerIndex.One))
             {
-                sprite.CurrentAnimation = AnimationKey.Left;
+                Sprite.CurrentAnimation = AnimationKey.Left;
                 motion.X = -1;
             }
             else if (InputHandler.KeyDown(Keys.D) ||
-               InputHandler.ButtonDown(Buttons.LeftThumbstickRight, PlayerIndex.One))
+            InputHandler.ButtonDown(Buttons.LeftThumbstickRight, PlayerIndex.One))
             {
-                sprite.CurrentAnimation = AnimationKey.Right;
+                Sprite.CurrentAnimation = AnimationKey.Right;
                 motion.X = 1;
             }
 
             if (motion != Vector2.Zero)
             {
-                sprite.IsAnimating = true;
+                Sprite.IsAnimating = true;
                 motion.Normalize();
-                sprite.Position += motion * sprite.Speed;
-                sprite.LockToMap();
+                Sprite.Position += motion * Sprite.Speed;
+                Sprite.LockToMap();
                 if (camera.CameraMode == CameraMode.Follow)
-                    camera.LockToSprite(sprite);
+                    camera.LockToSprite(Sprite);
             }
             else
             {
-                sprite.IsAnimating = false;
+                Sprite.IsAnimating = false;
             }
 
             if (InputHandler.KeyReleased(Keys.F) ||
-               InputHandler.ButtonReleased(Buttons.RightStick, PlayerIndex.One))
+            InputHandler.ButtonReleased(Buttons.RightStick, PlayerIndex.One))
             {
                 camera.ToggleCameraMode();
                 if (camera.CameraMode == CameraMode.Follow)
-                    camera.LockToSprite(sprite);
+                    camera.LockToSprite(Sprite);
             }
 
             if (camera.CameraMode != CameraMode.Follow)
             {
                 if (InputHandler.KeyReleased(Keys.C) ||
-                   InputHandler.ButtonReleased(Buttons.LeftStick, PlayerIndex.One))
+                InputHandler.ButtonReleased(Buttons.LeftStick, PlayerIndex.One))
                 {
-                    camera.LockToSprite(sprite);
+                    camera.LockToSprite(Sprite);
                 }
             }
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            sprite.Draw(gameTime, spriteBatch);
+            character.Draw(gameTime, spriteBatch);
         }
         #endregion
     }

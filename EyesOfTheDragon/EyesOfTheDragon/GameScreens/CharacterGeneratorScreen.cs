@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using RpgLibrary.CharacterClasses;
+using XRpgLibrary.CharacterClasses;
 using XRpgLibrary;
 using XRpgLibrary.Controls;
 using XRpgLibrary.SpriteClasses;
@@ -30,7 +32,7 @@ namespace EyesOfTheDragon.GameScreens
         Texture2D containers;
 
         string[] genderItems = { "Male", "Female" };
-        string[] classItems = { "Fighter", "Wizard", "Rogue", "Priest" };
+        string[] classItems;
         #endregion
 
         #region Property Region
@@ -61,6 +63,15 @@ namespace EyesOfTheDragon.GameScreens
         protected override void LoadContent()
         {
             base.LoadContent();
+
+            classItems = new string[DataManager.EntityData.Count];
+
+            int counter = 0;
+            foreach (string className in DataManager.EntityData.Keys)
+            {
+                classItems[counter] = className;
+                counter++;
+            }
 
             LoadImages();
             CreateControls();
@@ -169,10 +180,25 @@ namespace EyesOfTheDragon.GameScreens
             animations.Add(AnimationKey.Right, animation);
             animation = new Animation(3, 32, 32, 0, 96);
             animations.Add(AnimationKey.Up, animation);
+
             AnimatedSprite sprite = new AnimatedSprite(
                 characterImages[genderSelector.SelectedIndex, classSelector.SelectedIndex],
                 animations);
-            GamePlayScreen.Player = new Player(GameRef, sprite);
+
+            EntityGender gender = EntityGender.Male;
+
+            if (genderSelector.SelectedIndex == 1)
+                gender = EntityGender.Female;
+
+            Entity entity = new Entity(
+                "Pat",
+                DataManager.EntityData[classSelector.SelectedItem],
+                gender,
+                EntityType.Character);
+            
+            Character character = new Character(entity, sprite);
+
+            GamePlayScreen.Player = new Player(GameRef, character);
         }
 
         private void CreateWorld()

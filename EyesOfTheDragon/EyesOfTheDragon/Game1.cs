@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 using XRpgLibrary;
 using EyesOfTheDragon.GameScreens;
-
+using EyesOfTheDragon.Components;
 
 namespace EyesOfTheDragon
 {
@@ -90,6 +90,14 @@ namespace EyesOfTheDragon
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+
+            DataManager.ReadEntityData(Content);
+            DataManager.ReadArmorData(Content);
+            DataManager.ReadShieldData(Content);
+            DataManager.ReadWeaponData(Content);
+            DataManager.ReadChestData(Content);
+            DataManager.ReadKeyData(Content);
+            DataManager.ReadSkillData(Content);
         }
 
         /// <summary>
