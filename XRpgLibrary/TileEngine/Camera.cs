@@ -25,7 +25,7 @@ namespace XRpgLibrary.TileEngine
         public Vector2 Position
         {
             get { return position; }
-            private set { position = value; }
+            set { position = value; }
         }
 
         public float Speed
@@ -137,8 +137,9 @@ namespace XRpgLibrary.TileEngine
             position.X = newPosition.X - viewportRectangle.Width / 2;
             position.Y = newPosition.Y - viewportRectangle.Height / 2;
             LockCamera();
-        }
-        private void LockCamera()
+        }
+
+        public void LockCamera()
         {
             position.X = MathHelper.Clamp(position.X,
                 0,

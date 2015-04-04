@@ -74,6 +74,11 @@ namespace XRpgLibrary.TileEngine
                 layer.Draw(spriteBatch, camera, tilesets);
             }
         }
+
+        public void AddTileset(Tileset tileset)
+        {
+            tilesets.Add(tileset);
+        }
         #endregion
     }
 }

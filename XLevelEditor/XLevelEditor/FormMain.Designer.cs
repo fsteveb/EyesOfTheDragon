@@ -28,44 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.levelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mapLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.keysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mapLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.keysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.mapDisplay = new XLevelEditor.MapDisplay();
             this.tabProperties = new System.Windows.Forms.TabControl();
             this.tabTilesets = new System.Windows.Forms.TabPage();
+            this.lbTileset = new System.Windows.Forms.ListBox();
+            this.lblTilesets = new System.Windows.Forms.Label();
+            this.pbTilesetPreview = new System.Windows.Forms.PictureBox();
+            this.lblCurrentTileset = new System.Windows.Forms.Label();
+            this.nudCurrentTile = new System.Windows.Forms.NumericUpDown();
+            this.gbDrawMode = new System.Windows.Forms.GroupBox();
+            this.rbErase = new System.Windows.Forms.RadioButton();
+            this.rbDraw = new System.Windows.Forms.RadioButton();
+            this.pbTilePreview = new System.Windows.Forms.PictureBox();
+            this.lblTile = new System.Windows.Forms.Label();
             this.tabLayers = new System.Windows.Forms.TabPage();
+            this.clbLayers = new System.Windows.Forms.CheckedListBox();
             this.tabCharacters = new System.Windows.Forms.TabPage();
             this.tabChests = new System.Windows.Forms.TabPage();
             this.tabKeys = new System.Windows.Forms.TabPage();
-            this.lblTile = new System.Windows.Forms.Label();
-            this.pbTilePreview = new System.Windows.Forms.PictureBox();
-            this.gbDrawMode = new System.Windows.Forms.GroupBox();
-            this.rbDraw = new System.Windows.Forms.RadioButton();
-            this.rbErase = new System.Windows.Forms.RadioButton();
-            this.nudCurrentTile = new System.Windows.Forms.NumericUpDown();
-            this.lblCurrentTileset = new System.Windows.Forms.Label();
-            this.pbTilesetPreview = new System.Windows.Forms.PictureBox();
-            this.lblTilesets = new System.Windows.Forms.Label();
-            this.lbTileset = new System.Windows.Forms.ListBox();
-            this.clbLayers = new System.Windows.Forms.CheckedListBox();
+            this.controlTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -73,11 +75,11 @@
             this.splitContainer1.SuspendLayout();
             this.tabProperties.SuspendLayout();
             this.tabTilesets.SuspendLayout();
-            this.tabLayers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTilePreview)).BeginInit();
-            this.gbDrawMode.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCurrentTile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTilesetPreview)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCurrentTile)).BeginInit();
+            this.gbDrawMode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTilePreview)).BeginInit();
+            this.tabLayers.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -107,6 +109,35 @@
             this.levelToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.levelToolStripMenuItem.Text = "&Level";
             // 
+            // newLevelToolStripMenuItem
+            // 
+            this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
+            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.newLevelToolStripMenuItem.Text = "&New Level";
+            // 
+            // openLevelToolStripMenuItem
+            // 
+            this.openLevelToolStripMenuItem.Name = "openLevelToolStripMenuItem";
+            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.openLevelToolStripMenuItem.Text = "&Open Level";
+            // 
+            // saveLevelToolStripMenuItem
+            // 
+            this.saveLevelToolStripMenuItem.Name = "saveLevelToolStripMenuItem";
+            this.saveLevelToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.saveLevelToolStripMenuItem.Text = "&Save Level";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(130, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            // 
             // tilesetToolStripMenuItem
             // 
             this.tilesetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -117,63 +148,6 @@
             this.tilesetToolStripMenuItem.Name = "tilesetToolStripMenuItem";
             this.tilesetToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.tilesetToolStripMenuItem.Text = "&Tileset";
-            // 
-            // mapLayerToolStripMenuItem
-            // 
-            this.mapLayerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newLayerToolStripMenuItem,
-            this.openLayerToolStripMenuItem,
-            this.saveLayerToolStripMenuItem});
-            this.mapLayerToolStripMenuItem.Name = "mapLayerToolStripMenuItem";
-            this.mapLayerToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.mapLayerToolStripMenuItem.Text = "&Map Layer";
-            // 
-            // charactersToolStripMenuItem
-            // 
-            this.charactersToolStripMenuItem.Name = "charactersToolStripMenuItem";
-            this.charactersToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
-            this.charactersToolStripMenuItem.Text = "&Characters";
-            // 
-            // chestsToolStripMenuItem
-            // 
-            this.chestsToolStripMenuItem.Name = "chestsToolStripMenuItem";
-            this.chestsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.chestsToolStripMenuItem.Text = "C&hests";
-            // 
-            // keysToolStripMenuItem
-            // 
-            this.keysToolStripMenuItem.Name = "keysToolStripMenuItem";
-            this.keysToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.keysToolStripMenuItem.Text = "&Keys";
-            // 
-            // newLevelToolStripMenuItem
-            // 
-            this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
-            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.newLevelToolStripMenuItem.Text = "&New Level";
-            // 
-            // openLevelToolStripMenuItem
-            // 
-            this.openLevelToolStripMenuItem.Name = "openLevelToolStripMenuItem";
-            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.openLevelToolStripMenuItem.Text = "&Open Level";
-            // 
-            // saveLevelToolStripMenuItem
-            // 
-            this.saveLevelToolStripMenuItem.Name = "saveLevelToolStripMenuItem";
-            this.saveLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveLevelToolStripMenuItem.Text = "&Save Level";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // newTilesetToolStripMenuItem
             // 
@@ -199,23 +173,51 @@
             this.removeTilesetToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.removeTilesetToolStripMenuItem.Text = "&Remove Tileset";
             // 
+            // mapLayerToolStripMenuItem
+            // 
+            this.mapLayerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newLayerToolStripMenuItem,
+            this.openLayerToolStripMenuItem,
+            this.saveLayerToolStripMenuItem});
+            this.mapLayerToolStripMenuItem.Name = "mapLayerToolStripMenuItem";
+            this.mapLayerToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.mapLayerToolStripMenuItem.Text = "&Map Layer";
+            // 
             // newLayerToolStripMenuItem
             // 
             this.newLayerToolStripMenuItem.Name = "newLayerToolStripMenuItem";
-            this.newLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newLayerToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.newLayerToolStripMenuItem.Text = "&New Layer";
             // 
             // openLayerToolStripMenuItem
             // 
             this.openLayerToolStripMenuItem.Name = "openLayerToolStripMenuItem";
-            this.openLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openLayerToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.openLayerToolStripMenuItem.Text = "&Open Layer";
             // 
             // saveLayerToolStripMenuItem
             // 
             this.saveLayerToolStripMenuItem.Name = "saveLayerToolStripMenuItem";
-            this.saveLayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveLayerToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.saveLayerToolStripMenuItem.Text = "&Save Layer";
+            // 
+            // charactersToolStripMenuItem
+            // 
+            this.charactersToolStripMenuItem.Name = "charactersToolStripMenuItem";
+            this.charactersToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.charactersToolStripMenuItem.Text = "&Characters";
+            // 
+            // chestsToolStripMenuItem
+            // 
+            this.chestsToolStripMenuItem.Name = "chestsToolStripMenuItem";
+            this.chestsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.chestsToolStripMenuItem.Text = "C&hests";
+            // 
+            // keysToolStripMenuItem
+            // 
+            this.keysToolStripMenuItem.Name = "keysToolStripMenuItem";
+            this.keysToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.keysToolStripMenuItem.Text = "&Keys";
             // 
             // splitContainer1
             // 
@@ -275,6 +277,97 @@
             this.tabTilesets.Text = "Tiles";
             this.tabTilesets.UseVisualStyleBackColor = true;
             // 
+            // lbTileset
+            // 
+            this.lbTileset.FormattingEnabled = true;
+            this.lbTileset.Location = new System.Drawing.Point(7, 352);
+            this.lbTileset.Name = "lbTileset";
+            this.lbTileset.Size = new System.Drawing.Size(180, 251);
+            this.lbTileset.TabIndex = 7;
+            // 
+            // lblTilesets
+            // 
+            this.lblTilesets.Location = new System.Drawing.Point(7, 321);
+            this.lblTilesets.Name = "lblTilesets";
+            this.lblTilesets.Size = new System.Drawing.Size(180, 23);
+            this.lblTilesets.TabIndex = 6;
+            this.lblTilesets.Text = "Tilesets";
+            this.lblTilesets.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pbTilesetPreview
+            // 
+            this.pbTilesetPreview.Location = new System.Drawing.Point(7, 138);
+            this.pbTilesetPreview.Name = "pbTilesetPreview";
+            this.pbTilesetPreview.Size = new System.Drawing.Size(180, 180);
+            this.pbTilesetPreview.TabIndex = 5;
+            this.pbTilesetPreview.TabStop = false;
+            // 
+            // lblCurrentTileset
+            // 
+            this.lblCurrentTileset.Location = new System.Drawing.Point(7, 112);
+            this.lblCurrentTileset.Name = "lblCurrentTileset";
+            this.lblCurrentTileset.Size = new System.Drawing.Size(180, 23);
+            this.lblCurrentTileset.TabIndex = 4;
+            this.lblCurrentTileset.Text = "Current Tileset";
+            this.lblCurrentTileset.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // nudCurrentTile
+            // 
+            this.nudCurrentTile.Location = new System.Drawing.Point(7, 83);
+            this.nudCurrentTile.Name = "nudCurrentTile";
+            this.nudCurrentTile.Size = new System.Drawing.Size(180, 20);
+            this.nudCurrentTile.TabIndex = 3;
+            // 
+            // gbDrawMode
+            // 
+            this.gbDrawMode.Controls.Add(this.rbErase);
+            this.gbDrawMode.Controls.Add(this.rbDraw);
+            this.gbDrawMode.Location = new System.Drawing.Point(63, 7);
+            this.gbDrawMode.Name = "gbDrawMode";
+            this.gbDrawMode.Size = new System.Drawing.Size(128, 70);
+            this.gbDrawMode.TabIndex = 2;
+            this.gbDrawMode.TabStop = false;
+            this.gbDrawMode.Text = "Draw Mode";
+            // 
+            // rbErase
+            // 
+            this.rbErase.AutoSize = true;
+            this.rbErase.Location = new System.Drawing.Point(7, 43);
+            this.rbErase.Name = "rbErase";
+            this.rbErase.Size = new System.Drawing.Size(52, 17);
+            this.rbErase.TabIndex = 1;
+            this.rbErase.Text = "Erase";
+            this.rbErase.UseVisualStyleBackColor = true;
+            // 
+            // rbDraw
+            // 
+            this.rbDraw.AutoSize = true;
+            this.rbDraw.Checked = true;
+            this.rbDraw.Location = new System.Drawing.Point(7, 20);
+            this.rbDraw.Name = "rbDraw";
+            this.rbDraw.Size = new System.Drawing.Size(50, 17);
+            this.rbDraw.TabIndex = 0;
+            this.rbDraw.TabStop = true;
+            this.rbDraw.Text = "Draw";
+            this.rbDraw.UseVisualStyleBackColor = true;
+            // 
+            // pbTilePreview
+            // 
+            this.pbTilePreview.Location = new System.Drawing.Point(7, 27);
+            this.pbTilePreview.Name = "pbTilePreview";
+            this.pbTilePreview.Size = new System.Drawing.Size(50, 50);
+            this.pbTilePreview.TabIndex = 1;
+            this.pbTilePreview.TabStop = false;
+            // 
+            // lblTile
+            // 
+            this.lblTile.Location = new System.Drawing.Point(7, 7);
+            this.lblTile.Name = "lblTile";
+            this.lblTile.Size = new System.Drawing.Size(50, 17);
+            this.lblTile.TabIndex = 0;
+            this.lblTile.Text = "Tile";
+            this.lblTile.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // tabLayers
             // 
             this.tabLayers.Controls.Add(this.clbLayers);
@@ -285,6 +378,15 @@
             this.tabLayers.TabIndex = 1;
             this.tabLayers.Text = "Map Layers";
             this.tabLayers.UseVisualStyleBackColor = true;
+            // 
+            // clbLayers
+            // 
+            this.clbLayers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clbLayers.FormattingEnabled = true;
+            this.clbLayers.Location = new System.Drawing.Point(3, 3);
+            this.clbLayers.Name = "clbLayers";
+            this.clbLayers.Size = new System.Drawing.Size(190, 625);
+            this.clbLayers.TabIndex = 0;
             // 
             // tabCharacters
             // 
@@ -313,106 +415,6 @@
             this.tabKeys.Text = "Keys";
             this.tabKeys.UseVisualStyleBackColor = true;
             // 
-            // lblTile
-            // 
-            this.lblTile.Location = new System.Drawing.Point(7, 7);
-            this.lblTile.Name = "lblTile";
-            this.lblTile.Size = new System.Drawing.Size(50, 17);
-            this.lblTile.TabIndex = 0;
-            this.lblTile.Text = "Tile";
-            this.lblTile.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // pbTilePreview
-            // 
-            this.pbTilePreview.Location = new System.Drawing.Point(7, 27);
-            this.pbTilePreview.Name = "pbTilePreview";
-            this.pbTilePreview.Size = new System.Drawing.Size(50, 50);
-            this.pbTilePreview.TabIndex = 1;
-            this.pbTilePreview.TabStop = false;
-            // 
-            // gbDrawMode
-            // 
-            this.gbDrawMode.Controls.Add(this.rbErase);
-            this.gbDrawMode.Controls.Add(this.rbDraw);
-            this.gbDrawMode.Location = new System.Drawing.Point(63, 7);
-            this.gbDrawMode.Name = "gbDrawMode";
-            this.gbDrawMode.Size = new System.Drawing.Size(128, 70);
-            this.gbDrawMode.TabIndex = 2;
-            this.gbDrawMode.TabStop = false;
-            this.gbDrawMode.Text = "Draw Mode";
-            // 
-            // rbDraw
-            // 
-            this.rbDraw.AutoSize = true;
-            this.rbDraw.Checked = true;
-            this.rbDraw.Location = new System.Drawing.Point(7, 20);
-            this.rbDraw.Name = "rbDraw";
-            this.rbDraw.Size = new System.Drawing.Size(50, 17);
-            this.rbDraw.TabIndex = 0;
-            this.rbDraw.TabStop = true;
-            this.rbDraw.Text = "Draw";
-            this.rbDraw.UseVisualStyleBackColor = true;
-            // 
-            // rbErase
-            // 
-            this.rbErase.AutoSize = true;
-            this.rbErase.Location = new System.Drawing.Point(7, 43);
-            this.rbErase.Name = "rbErase";
-            this.rbErase.Size = new System.Drawing.Size(52, 17);
-            this.rbErase.TabIndex = 1;
-            this.rbErase.Text = "Erase";
-            this.rbErase.UseVisualStyleBackColor = true;
-            // 
-            // nudCurrentTile
-            // 
-            this.nudCurrentTile.Location = new System.Drawing.Point(7, 83);
-            this.nudCurrentTile.Name = "nudCurrentTile";
-            this.nudCurrentTile.Size = new System.Drawing.Size(180, 20);
-            this.nudCurrentTile.TabIndex = 3;
-            // 
-            // lblCurrentTileset
-            // 
-            this.lblCurrentTileset.Location = new System.Drawing.Point(7, 112);
-            this.lblCurrentTileset.Name = "lblCurrentTileset";
-            this.lblCurrentTileset.Size = new System.Drawing.Size(180, 23);
-            this.lblCurrentTileset.TabIndex = 4;
-            this.lblCurrentTileset.Text = "Current Tileset";
-            this.lblCurrentTileset.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // pbTilesetPreview
-            // 
-            this.pbTilesetPreview.Location = new System.Drawing.Point(7, 138);
-            this.pbTilesetPreview.Name = "pbTilesetPreview";
-            this.pbTilesetPreview.Size = new System.Drawing.Size(180, 180);
-            this.pbTilesetPreview.TabIndex = 5;
-            this.pbTilesetPreview.TabStop = false;
-            // 
-            // lblTilesets
-            // 
-            this.lblTilesets.Location = new System.Drawing.Point(7, 321);
-            this.lblTilesets.Name = "lblTilesets";
-            this.lblTilesets.Size = new System.Drawing.Size(180, 23);
-            this.lblTilesets.TabIndex = 6;
-            this.lblTilesets.Text = "Tilesets";
-            this.lblTilesets.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbTileset
-            // 
-            this.lbTileset.FormattingEnabled = true;
-            this.lbTileset.Location = new System.Drawing.Point(7, 352);
-            this.lbTileset.Name = "lbTileset";
-            this.lbTileset.Size = new System.Drawing.Size(180, 251);
-            this.lbTileset.TabIndex = 7;
-            // 
-            // clbLayers
-            // 
-            this.clbLayers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clbLayers.FormattingEnabled = true;
-            this.clbLayers.Location = new System.Drawing.Point(3, 3);
-            this.clbLayers.Name = "clbLayers";
-            this.clbLayers.Size = new System.Drawing.Size(190, 625);
-            this.clbLayers.TabIndex = 0;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -432,12 +434,12 @@
             this.splitContainer1.ResumeLayout(false);
             this.tabProperties.ResumeLayout(false);
             this.tabTilesets.ResumeLayout(false);
-            this.tabLayers.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbTilePreview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTilesetPreview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCurrentTile)).EndInit();
             this.gbDrawMode.ResumeLayout(false);
             this.gbDrawMode.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCurrentTile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTilesetPreview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTilePreview)).EndInit();
+            this.tabLayers.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -483,5 +485,6 @@
         private System.Windows.Forms.Label lblTilesets;
         private System.Windows.Forms.PictureBox pbTilesetPreview;
         private System.Windows.Forms.CheckedListBox clbLayers;
+        private System.Windows.Forms.Timer controlTimer;
     }
 }
