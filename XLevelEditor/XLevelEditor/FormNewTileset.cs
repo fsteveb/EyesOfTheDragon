@@ -34,9 +34,19 @@ namespace XLevelEditor
         public FormNewTileset()
         {
             InitializeComponent();
+
             btnSelectImage.Click += new EventHandler(btnSelectImage_Click);
             btnOK.Click += new EventHandler(btnOK_Click);
             btnCancel.Click += new EventHandler(btnCancel_Click);
+
+            SetDefaultValues();
+        }
+
+        private void SetDefaultValues()
+        {
+            tbTilesetName.Text = "Village Tileset";
+            mtbTileWidth.Text = "32";
+            mtbTileHeight.Text = "32";
         }
         #endregion
 
@@ -48,8 +58,8 @@ namespace XLevelEditor
             ofDialog.CheckFileExists = true;
             ofDialog.CheckPathExists = true;
             ofDialog.Multiselect = false;
-            DialogResult result = ofDialog.ShowDialog();
 
+            DialogResult result = ofDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 tbTilesetImage.Text = ofDialog.FileName;
@@ -80,7 +90,7 @@ namespace XLevelEditor
                 MessageBox.Show("Tile width must be an integer value.");
                 return;
             }
-            else if (tileWidth < 0)
+            else if (tileWidth < 1)
             {
                 MessageBox.Show("Tile width must me greater than zero.");
                 return;
@@ -91,33 +101,15 @@ namespace XLevelEditor
                 MessageBox.Show("Tile height must be an integer value.");
                 return;
             }
-            else if (tileHeight < 0)
+            else if (tileHeight < 1)
             {
                 MessageBox.Show("Tile height must be greater than zero.");
                 return;
             }
 
-            if (!int.TryParse(mtbTilesWide.Text, out tilesWide))
-            {
-                MessageBox.Show("Tiles wide must be an integer value.");
-                return;
-            }
-            else if (tilesWide < 0)
-            {
-                MessageBox.Show("Tiles wide must me greater than zero.");
-                return;
-            }
-
-            if (!int.TryParse(mtbTilesHigh.Text, out tilesHigh))
-            {
-                MessageBox.Show("Tiles high must be an integer value.");
-                return;
-            }
-            else if (tilesHigh < 0)
-            {
-                MessageBox.Show("Tiles high must be greater than zero.");
-                return;
-            }
+            Image tileSet = (Image)Bitmap.FromFile(tbTilesetImage.Text);
+            tilesWide = tileSet.Width / tileWidth;
+            tilesHigh = tileSet.Height / tileHeight;
 
             tilesetData = new TilesetData();
             tilesetData.TilesetName = tbTilesetName.Text;
@@ -126,14 +118,15 @@ namespace XLevelEditor
             tilesetData.TileHeightInPixels = tileHeight;
             tilesetData.TilesWide = tilesWide;
             tilesetData.TilesHigh = tilesHigh;
-
             okPressed = true;
+
             this.Close();
         }
 
         void btnCancel_Click(object sender, EventArgs e)
         {
             okPressed = false;
+
             this.Close();
         }
         #endregion

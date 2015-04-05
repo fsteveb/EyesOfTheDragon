@@ -38,17 +38,13 @@
             this.lblTileWidth = new System.Windows.Forms.Label();
             this.lblTilesetImageName = new System.Windows.Forms.Label();
             this.lblTilesetName = new System.Windows.Forms.Label();
-            this.mtbTilesHigh = new System.Windows.Forms.MaskedTextBox();
-            this.mtbTilesWide = new System.Windows.Forms.MaskedTextBox();
-            this.lblTilesHigh = new System.Windows.Forms.Label();
-            this.lblTilesWide = new System.Windows.Forms.Label();
             this.btnSelectImage = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(161, 185);
+            this.btnCancel.Location = new System.Drawing.Point(184, 120);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
@@ -58,7 +54,7 @@
             // btnOK
             // 
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(58, 185);
+            this.btnOK.Location = new System.Drawing.Point(81, 120);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 6;
@@ -131,40 +127,6 @@
             this.lblTilesetName.TabIndex = 10;
             this.lblTilesetName.Text = "Tileset Name:";
             // 
-            // mtbTilesHigh
-            // 
-            this.mtbTilesHigh.Location = new System.Drawing.Point(117, 160);
-            this.mtbTilesHigh.Mask = "000";
-            this.mtbTilesHigh.Name = "mtbTilesHigh";
-            this.mtbTilesHigh.Size = new System.Drawing.Size(100, 20);
-            this.mtbTilesHigh.TabIndex = 5;
-            // 
-            // mtbTilesWide
-            // 
-            this.mtbTilesWide.Location = new System.Drawing.Point(117, 129);
-            this.mtbTilesWide.Mask = "000";
-            this.mtbTilesWide.Name = "mtbTilesWide";
-            this.mtbTilesWide.Size = new System.Drawing.Size(100, 20);
-            this.mtbTilesWide.TabIndex = 4;
-            // 
-            // lblTilesHigh
-            // 
-            this.lblTilesHigh.AutoSize = true;
-            this.lblTilesHigh.Location = new System.Drawing.Point(14, 163);
-            this.lblTilesHigh.Name = "lblTilesHigh";
-            this.lblTilesHigh.Size = new System.Drawing.Size(97, 13);
-            this.lblTilesHigh.TabIndex = 21;
-            this.lblTilesHigh.Text = "Number Tiles High:";
-            // 
-            // lblTilesWide
-            // 
-            this.lblTilesWide.AutoSize = true;
-            this.lblTilesWide.Location = new System.Drawing.Point(11, 132);
-            this.lblTilesWide.Name = "lblTilesWide";
-            this.lblTilesWide.Size = new System.Drawing.Size(100, 13);
-            this.lblTilesWide.TabIndex = 20;
-            this.lblTilesWide.Text = "Number Tiles Wide:";
-            // 
             // btnSelectImage
             // 
             this.btnSelectImage.Location = new System.Drawing.Point(323, 37);
@@ -178,13 +140,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 220);
+            this.ClientSize = new System.Drawing.Size(361, 149);
             this.ControlBox = false;
             this.Controls.Add(this.btnSelectImage);
-            this.Controls.Add(this.mtbTilesHigh);
-            this.Controls.Add(this.mtbTilesWide);
-            this.Controls.Add(this.lblTilesHigh);
-            this.Controls.Add(this.lblTilesWide);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.mtbTileHeight);
@@ -216,10 +174,6 @@
         private System.Windows.Forms.Label lblTileWidth;
         private System.Windows.Forms.Label lblTilesetImageName;
         private System.Windows.Forms.Label lblTilesetName;
-        private System.Windows.Forms.MaskedTextBox mtbTilesHigh;
-        private System.Windows.Forms.MaskedTextBox mtbTilesWide;
-        private System.Windows.Forms.Label lblTilesHigh;
-        private System.Windows.Forms.Label lblTilesWide;
         private System.Windows.Forms.Button btnSelectImage;
     }
 }

@@ -49,7 +49,6 @@
             this.chestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.keysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.mapDisplay = new XLevelEditor.MapDisplay();
             this.tabProperties = new System.Windows.Forms.TabControl();
             this.tabTilesets = new System.Windows.Forms.TabPage();
             this.lbTileset = new System.Windows.Forms.ListBox();
@@ -68,6 +67,11 @@
             this.tabChests = new System.Windows.Forms.TabPage();
             this.tabKeys = new System.Windows.Forms.TabPage();
             this.controlTimer = new System.Windows.Forms.Timer(this.components);
+            this.lblCursor = new System.Windows.Forms.Label();
+            this.tbMapLocation = new System.Windows.Forms.TextBox();
+            this.mapDisplay = new XLevelEditor.MapDisplay();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.displayGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -86,6 +90,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.levelToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.tilesetToolStripMenuItem,
             this.mapLayerToolStripMenuItem,
             this.charactersToolStripMenuItem,
@@ -236,15 +241,6 @@
             this.splitContainer1.SplitterDistance = 800;
             this.splitContainer1.TabIndex = 1;
             // 
-            // mapDisplay
-            // 
-            this.mapDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapDisplay.Location = new System.Drawing.Point(0, 0);
-            this.mapDisplay.Name = "mapDisplay";
-            this.mapDisplay.Size = new System.Drawing.Size(800, 657);
-            this.mapDisplay.TabIndex = 0;
-            this.mapDisplay.Text = "mapDisplay1";
-            // 
             // tabProperties
             // 
             this.tabProperties.Controls.Add(this.tabTilesets);
@@ -261,6 +257,8 @@
             // 
             // tabTilesets
             // 
+            this.tabTilesets.Controls.Add(this.tbMapLocation);
+            this.tabTilesets.Controls.Add(this.lblCursor);
             this.tabTilesets.Controls.Add(this.lbTileset);
             this.tabTilesets.Controls.Add(this.lblTilesets);
             this.tabTilesets.Controls.Add(this.pbTilesetPreview);
@@ -282,7 +280,7 @@
             this.lbTileset.FormattingEnabled = true;
             this.lbTileset.Location = new System.Drawing.Point(7, 352);
             this.lbTileset.Name = "lbTileset";
-            this.lbTileset.Size = new System.Drawing.Size(180, 251);
+            this.lbTileset.Size = new System.Drawing.Size(180, 212);
             this.lbTileset.TabIndex = 7;
             // 
             // lblTilesets
@@ -415,6 +413,49 @@
             this.tabKeys.Text = "Keys";
             this.tabKeys.UseVisualStyleBackColor = true;
             // 
+            // lblCursor
+            // 
+            this.lblCursor.Location = new System.Drawing.Point(8, 567);
+            this.lblCursor.Name = "lblCursor";
+            this.lblCursor.Size = new System.Drawing.Size(180, 23);
+            this.lblCursor.TabIndex = 8;
+            this.lblCursor.Text = "Map Location";
+            this.lblCursor.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // tbMapLocation
+            // 
+            this.tbMapLocation.Enabled = false;
+            this.tbMapLocation.Location = new System.Drawing.Point(8, 590);
+            this.tbMapLocation.Name = "tbMapLocation";
+            this.tbMapLocation.Size = new System.Drawing.Size(180, 20);
+            this.tbMapLocation.TabIndex = 9;
+            // 
+            // mapDisplay
+            // 
+            this.mapDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapDisplay.Location = new System.Drawing.Point(0, 0);
+            this.mapDisplay.Name = "mapDisplay";
+            this.mapDisplay.Size = new System.Drawing.Size(800, 657);
+            this.mapDisplay.TabIndex = 0;
+            this.mapDisplay.Text = "mapDisplay1";
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.displayGridToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "&View";
+            // 
+            // displayGridToolStripMenuItem
+            // 
+            this.displayGridToolStripMenuItem.Checked = true;
+            this.displayGridToolStripMenuItem.CheckOnClick = true;
+            this.displayGridToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.displayGridToolStripMenuItem.Name = "displayGridToolStripMenuItem";
+            this.displayGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.displayGridToolStripMenuItem.Text = "&Display Grid";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -434,6 +475,7 @@
             this.splitContainer1.ResumeLayout(false);
             this.tabProperties.ResumeLayout(false);
             this.tabTilesets.ResumeLayout(false);
+            this.tabTilesets.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbTilesetPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCurrentTile)).EndInit();
             this.gbDrawMode.ResumeLayout(false);
@@ -486,5 +528,9 @@
         private System.Windows.Forms.PictureBox pbTilesetPreview;
         private System.Windows.Forms.CheckedListBox clbLayers;
         private System.Windows.Forms.Timer controlTimer;
+        private System.Windows.Forms.TextBox tbMapLocation;
+        private System.Windows.Forms.Label lblCursor;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem displayGridToolStripMenuItem;
     }
 }

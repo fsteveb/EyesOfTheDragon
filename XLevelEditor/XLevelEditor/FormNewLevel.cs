@@ -37,6 +37,15 @@ namespace XLevelEditor
 
             btnOK.Click += new EventHandler(btnOK_Click);
             btnCancel.Click += new EventHandler(btnCancel_Click);
+            SetDefaultValues();
+        }
+
+        private void SetDefaultValues()
+        {
+            tbLevelName.Text = "Starting Level";
+            tbMapName.Text = "Village";
+            mtbWidth.Text = "100";
+            mtbHeight.Text = "100";
         }
         #endregion
 

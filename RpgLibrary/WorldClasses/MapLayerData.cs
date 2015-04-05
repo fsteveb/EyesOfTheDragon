@@ -53,6 +53,11 @@ namespace RpgLibrary.WorldClasses
             Layer[y * Width + x] = tile;
         }
 
+        public void SetTile(int x, int y, int tileIndex, int tileSet)
+        {
+            Layer[y * Width + x] = new Tile(tileIndex, tileSet);
+        }
+
         public Tile GetTile(int x, int y)
         {
             return Layer[y * Width + x];

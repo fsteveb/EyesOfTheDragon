@@ -29,17 +29,21 @@ namespace XLevelEditor
         SpriteBatch spriteBatch;
         LevelData levelData;
         TileMap map;
-        
+
         List<Tileset> tileSets = new List<Tileset>();
         List<MapLayer> layers = new List<MapLayer>();
         List<GDIImage> tileSetImages = new List<GDIImage>();
-        
+        List<TilesetData> tileSetData = new List<TilesetData>();
+
         Camera camera;
         Engine engine;
 
         Point mouse = new Point();
         bool isMouseDown = false;
         bool trackMouse = false;
+
+        Texture2D cursor;
+        Texture2D grid;
         #endregion
 
         #region Property Region
@@ -66,8 +70,136 @@ namespace XLevelEditor
             newLevelToolStripMenuItem.Click += new EventHandler(newLevelToolStripMenuItem_Click);
             newTilesetToolStripMenuItem.Click += new EventHandler(newTilesetToolStripMenuItem_Click);
             newLayerToolStripMenuItem.Click += new EventHandler(newLayerToolStripMenuItem_Click);
+            
+            saveLevelToolStripMenuItem.Click += new EventHandler(saveLevelToolStripMenuItem_Click);
+            openLevelToolStripMenuItem.Click += new EventHandler(openLevelToolStripMenuItem_Click);
+
             mapDisplay.OnInitialize += new EventHandler(mapDisplay_OnInitialize);
             mapDisplay.OnDraw += new EventHandler(mapDisplay_OnDraw);
+        }
+        #endregion
+
+        #region Save Menu Item Event Handler Region
+        void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofDialog = new OpenFileDialog();
+            ofDialog.Filter = "Level Files (*.xml)|*.xml";
+            ofDialog.CheckFileExists = true;
+            ofDialog.CheckPathExists = true;
+            DialogResult result = ofDialog.ShowDialog();
+
+            if (result != DialogResult.OK)
+                return;
+
+            string path = Path.GetDirectoryName(ofDialog.FileName);
+            LevelData newLevel = null;
+            MapData mapData = null;
+
+            try
+            {
+                newLevel = XnaSerializer.Deserialize<LevelData>(ofDialog.FileName);
+                mapData = XnaSerializer.Deserialize<MapData>(path + @"\Maps\" + newLevel.MapName +
+                ".xml");
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message, "Error reading level");
+                return;
+            }
+
+            tileSetImages.Clear();
+            tileSetData.Clear();
+            tileSets.Clear();
+            layers.Clear();
+            lbTileset.Items.Clear();
+            clbLayers.Items.Clear();
+
+            foreach (TilesetData data in mapData.Tilesets)
+            {
+                Texture2D texture = null;
+                tileSetData.Add(data);
+                lbTileset.Items.Add(data.TilesetName);
+                GDIImage image = (GDIImage)GDIBitmap.FromFile(data.TilesetImageName);
+                tileSetImages.Add(image);
+                using (Stream stream = new FileStream(data.TilesetImageName, FileMode.Open,
+                FileAccess.Read))
+                {
+                    texture = Texture2D.FromStream(GraphicsDevice, stream);
+                    tileSets.Add(
+                        new Tileset(
+                            texture,
+                            data.TilesWide,
+                            data.TilesHigh,
+                            data.TileWidthInPixels,
+                            data.TileHeightInPixels));
+                }
+            }
+
+            foreach (MapLayerData data in mapData.Layers)
+            {
+                clbLayers.Items.Add(data.MapLayerName, true);
+                layers.Add(MapLayer.FromMapLayerData(data));
+            }
+
+            lbTileset.SelectedIndex = 0;
+            clbLayers.SelectedIndex = 0;
+            nudCurrentTile.Value = 0;
+
+            map = new TileMap(tileSets, layers);
+            tilesetToolStripMenuItem.Enabled = true;
+            mapLayerToolStripMenuItem.Enabled = true;
+            charactersToolStripMenuItem.Enabled = true;
+            chestsToolStripMenuItem.Enabled = true;
+            keysToolStripMenuItem.Enabled = true;
+        }
+
+        void saveLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (map == null)
+                return;
+
+            List<MapLayerData> mapLayerData = new List<MapLayerData>();
+            for (int i = 0; i < clbLayers.Items.Count; i++)
+            {
+                MapLayerData data = new MapLayerData(
+                    clbLayers.Items[i].ToString(),
+                    layers[i].Width,
+                    layers[i].Height);
+                for (int y = 0; y < layers[i].Height; y++)
+                    for (int x = 0; x < layers[i].Width; x++)
+                        data.SetTile(
+                            x,
+                            y,
+                            layers[i].GetTile(x, y).TileIndex,
+                            layers[i].GetTile(x, y).Tileset);
+                mapLayerData.Add(data);
+            }
+
+            MapData mapData = new MapData(levelData.MapName, tileSetData, mapLayerData);
+            FolderBrowserDialog fbDialog = new FolderBrowserDialog();
+            fbDialog.Description = "Select Game Folder";
+            fbDialog.SelectedPath = Application.StartupPath;
+
+            DialogResult result = fbDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                if (!File.Exists(fbDialog.SelectedPath + @"\Game.xml"))
+                {
+                    MessageBox.Show("Game not found", "Error");
+                    return;
+                }
+
+                string LevelPath = Path.Combine(fbDialog.SelectedPath, @"Levels\");
+                string MapPath = Path.Combine(LevelPath, @"Maps\");
+
+                if (!Directory.Exists(LevelPath))
+                    Directory.CreateDirectory(LevelPath);
+                if (!Directory.Exists(MapPath))
+                    Directory.CreateDirectory(MapPath);
+
+                XnaSerializer.Serialize<LevelData>(LevelPath + levelData.LevelName + ".xml", levelData);
+                XnaSerializer.Serialize<MapData>(MapPath + mapData.MapName + ".xml", mapData);
+            }
         }
         #endregion
 
@@ -85,12 +217,49 @@ namespace XLevelEditor
             controlTimer.Tick += new EventHandler(controlTimer_Tick);
             controlTimer.Enabled = true;
             controlTimer.Interval = 200;
+
+            tbMapLocation.TextAlign = HorizontalAlignment.Center;
+            pbTilesetPreview.MouseDown += new MouseEventHandler(pbTilesetPreview_MouseDown);
+
+            mapDisplay.SizeChanged += new EventHandler(mapDisplay_SizeChanged);
         }
 
         void controlTimer_Tick(object sender, EventArgs e)
         {
             mapDisplay.Invalidate();
             Logic();
+        }
+
+        void mapDisplay_SizeChanged(object sender, EventArgs e)
+        {
+            Rectangle viewPort = new Rectangle(0, 0, mapDisplay.Width, mapDisplay.Height);
+            Vector2 cameraPosition = camera.Position;
+            camera = new Camera(viewPort, cameraPosition);
+            camera.LockCamera();
+            mapDisplay.Invalidate();
+        }
+
+        void pbTilesetPreview_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (lbTileset.Items.Count == 0)
+                return;
+
+            if (e.Button != System.Windows.Forms.MouseButtons.Left)
+                return;
+
+            int index = lbTileset.SelectedIndex;
+            float xScale = (float)tileSetImages[index].Width / pbTilesetPreview.Width;
+
+            float yScale = (float)tileSetImages[index].Height / pbTilesetPreview.Height;
+
+            Point previewPoint = new Point(e.X, e.Y);
+            Point tilesetPoint = new Point(
+                (int)(previewPoint.X * xScale),
+                (int)(previewPoint.Y * yScale));
+            Point tile = new Point(
+                tilesetPoint.X / tileSets[index].TileWidth,
+                tilesetPoint.Y / tileSets[index].TileHeight);
+            nudCurrentTile.Value = tile.Y * tileSets[index].TilesWide + tile.X;
         }
 
         void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -166,8 +335,7 @@ namespace XLevelEditor
                     {
                         GDIImage image = (GDIImage)GDIBitmap.FromFile(data.TilesetImageName);
                         tileSetImages.Add(image);
-                        Stream stream = new FileStream(data.TilesetImageName, FileMode.Open,
-                            FileAccess.Read);
+                        Stream stream = new FileStream(data.TilesetImageName, FileMode.Open, FileAccess.Read);
                         Texture2D texture = Texture2D.FromStream(GraphicsDevice, stream);
                         Tileset tileset = new Tileset(
                             texture,
@@ -176,9 +344,11 @@ namespace XLevelEditor
                             data.TileWidthInPixels,
                             data.TileHeightInPixels);
                         tileSets.Add(tileset);
+                        tileSetData.Add(data);
 
                         if (map != null)
                             map.AddTileset(tileset);
+
                         stream.Close();
                         stream.Dispose();
                     }
@@ -234,6 +404,27 @@ namespace XLevelEditor
             mapDisplay.MouseMove += new MouseEventHandler(mapDisplay_MouseMove);
             mapDisplay.MouseDown += new MouseEventHandler(mapDisplay_MouseDown);
             mapDisplay.MouseUp += new MouseEventHandler(mapDisplay_MouseUp);
+
+            try
+            {
+                using (Stream stream = new FileStream(@"Content\grid.png", FileMode.Open, FileAccess.Read))
+                {
+                    grid = Texture2D.FromStream(GraphicsDevice, stream);
+                    stream.Close();
+                }
+
+                using (Stream stream = new FileStream(@"Content\cursor.png", FileMode.Open, FileAccess.Read))
+                {
+                    cursor = Texture2D.FromStream(GraphicsDevice, stream);
+                    stream.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message, "Error reading images");
+                grid = null;
+                cursor = null;
+            }
         }
 
         void mapDisplay_OnDraw(object sender, EventArgs e)
@@ -289,52 +480,101 @@ namespace XLevelEditor
 
                 if (clbLayers.GetItemChecked(i))
                     layers[i].Draw(spriteBatch, camera, tileSets);
+
                 spriteBatch.End();
             }
+
+            DrawDisplay();
         }
 
+        private void DrawDisplay()
+        {
+            if (map == null)
+                return;
+
+            Rectangle destination = new Rectangle(
+                0,
+                0,
+                Engine.TileWidth,
+                Engine.TileHeight);
+
+            if (displayGridToolStripMenuItem.Checked)
+            {
+                int maxX = mapDisplay.Width / Engine.TileWidth + 1;
+                int maxY = mapDisplay.Height / Engine.TileHeight + 1;
+
+                spriteBatch.Begin();
+
+                for (int y = 0; y < maxY; y++)
+                {
+                    destination.Y = y * Engine.TileHeight;
+                    for (int x = 0; x < maxX; x++)
+                    {
+                        destination.X = x * Engine.TileWidth;
+                        spriteBatch.Draw(grid, destination, Color.White);
+                    }
+                }
+
+                spriteBatch.End();
+            }
+
+            spriteBatch.Begin();
+
+            destination.X = mouse.X;
+            destination.Y = mouse.Y;
+            spriteBatch.Draw(
+                tileSets[lbTileset.SelectedIndex].Texture,
+                destination,
+                tileSets[lbTileset.SelectedIndex].SourceRectangles[(int)nudCurrentTile.Value], Color.White);
+            spriteBatch.Draw(cursor, destination, Color.White);
+
+            spriteBatch.End();
+        }
 
         private void Logic()
         {
             if (layers.Count == 0)
                 return;
-
             Vector2 position = camera.Position;
             if (trackMouse)
             {
                 if (mouse.X < Engine.TileWidth)
                     position.X -= Engine.TileWidth;
+
                 if (mouse.X > mapDisplay.Width - Engine.TileWidth)
                     position.X += Engine.TileWidth;
+
                 if (mouse.Y < Engine.TileHeight)
                     position.Y -= Engine.TileHeight;
+
                 if (mouse.Y > mapDisplay.Height - Engine.TileHeight)
                     position.Y += Engine.TileHeight;
+
                 camera.Position = position;
                 camera.LockCamera();
+
                 position.X = mouse.X + camera.Position.X;
                 position.Y = mouse.Y + camera.Position.Y;
-
                 Point tile = Engine.VectorToCell(position);
+                tbMapLocation.Text = "( " + tile.X.ToString() + ", " + tile.Y.ToString() + " )";
 
                 if (isMouseDown)
                 {
                     if (rbDraw.Checked)
                     {
                         layers[clbLayers.SelectedIndex].SetTile(
-                        tile.X,
-                        tile.Y,
-                        (int)nudCurrentTile.Value,
-                        lbTileset.SelectedIndex);
+                            tile.X,
+                            tile.Y,
+                            (int)nudCurrentTile.Value,
+                            lbTileset.SelectedIndex);
                     }
-
                     if (rbErase.Checked)
                     {
                         layers[clbLayers.SelectedIndex].SetTile(
-                        tile.X,
-                        tile.Y,
-                        -1,
-                        -1);
+                            tile.X,
+                            tile.Y,
+                            -1,
+                            -1);
                     }
                 }
             }
